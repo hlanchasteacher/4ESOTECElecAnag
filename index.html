@@ -1,411 +1,287 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laboratorio Virtual de Electrónica Analógica - 4º ESO</title>
+<title>CircuitWorks · Analog Electronics Lab</title>
 <style>
   :root{
-    --azul:#0d47a1;
-    --azul-claro:#1976d2;
-    --azul-muy-claro:#e3f2fd;
-    --verde:#2e7d32;
-    --verde-claro:#e8f5e9;
-    --naranja:#ef6c00;
-    --naranja-claro:#fff3e0;
-    --rojo:#c62828;
-    --rojo-claro:#ffebee;
-    --gris:#f5f5f5;
-    --gris-borde:#e0e0e0;
-    --texto:#212121;
-    --texto-suave:#555;
-    --sombra:0 2px 8px rgba(0,0,0,0.08);
-    --radio:10px;
+    --azul:#0d47a1; --azul-claro:#1976d2; --azul-muy-claro:#e3f2fd;
+    --verde:#2e7d32; --verde-claro:#e8f5e9;
+    --naranja:#ef6c00; --naranja-claro:#fff3e0;
+    --rojo:#c62828; --rojo-claro:#ffebee;
+    --gris:#f5f5f5; --gris-borde:#e0e0e0;
+    --texto:#212121; --texto-suave:#555;
+    --sombra:0 2px 10px rgba(0,0,0,0.08);
+    --radio:12px;
   }
-
   *{box-sizing:border-box;margin:0;padding:0;}
-
-  html{scroll-behavior:smooth;scroll-padding-top:80px;}
-
+  html{scroll-behavior:smooth;}
   body{
     font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-    color:var(--texto);
-    background:#fafafa;
-    line-height:1.65;
+    color:var(--texto); background:#f4f6f8; line-height:1.65;
+    min-height:100vh; display:flex; flex-direction:column;
   }
 
-  /* ---------- HEADER ---------- */
+  /* HEADER */
   header{
-    background:linear-gradient(135deg,#0d47a1 0%,#1976d2 60%,#42a5f5 100%);
-    color:#fff;
-    padding:3rem 1.5rem 2.5rem;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
+    background:linear-gradient(135deg,#0a2a5e 0%,#0d47a1 50%,#1976d2 100%);
+    color:#fff; padding:2.2rem 1.5rem 1.8rem; text-align:center;
+    position:relative; overflow:hidden;
   }
   header::after{
-    content:"⚡";
-    position:absolute;
-    font-size:14rem;
-    opacity:0.08;
-    right:-2rem;
-    top:-3rem;
-    transform:rotate(-15deg);
+    content:"⚡"; position:absolute; font-size:12rem; opacity:0.07;
+    right:-1.5rem; top:-3rem; transform:rotate(-15deg);
   }
   header h1{
-    font-size:clamp(1.6rem,4vw,2.4rem);
-    margin-bottom:.5rem;
-    position:relative;
-    z-index:1;
+    font-size:clamp(1.4rem,3.5vw,2rem); margin-bottom:.3rem;
+    position:relative; z-index:1; letter-spacing:.5px;
   }
-  header p{
-    font-size:1.1rem;
-    opacity:.95;
-    position:relative;
-    z-index:1;
+  header .tagline{
+    font-size:.95rem; opacity:.9; position:relative; z-index:1;
+    font-style:italic;
   }
-  header .badge{
-    display:inline-block;
-    background:rgba(255,255,255,.2);
-    padding:.3rem .9rem;
-    border-radius:20px;
-    font-size:.85rem;
-    margin-top:.8rem;
-    position:relative;
-    z-index:1;
-    backdrop-filter:blur(4px);
+  header .rank{
+    display:inline-block; background:rgba(255,255,255,.15);
+    padding:.35rem 1rem; border-radius:20px; font-size:.8rem;
+    margin-top:.7rem; position:relative; z-index:1;
+    border:1px solid rgba(255,255,255,.25); backdrop-filter:blur(4px);
   }
+  header .rank strong{color:#ffd54f;}
 
-  /* ---------- NAV ---------- */
+  /* NAV */
   nav{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:#fff;
-    border-bottom:2px solid var(--gris-borde);
-    box-shadow:var(--sombra);
-    overflow-x:auto;
+    position:sticky; top:0; z-index:100; background:#fff;
+    border-bottom:2px solid var(--gris-borde); box-shadow:var(--sombra);
+    overflow-x:auto; scrollbar-width:thin;
   }
   nav ul{
-    display:flex;
-    list-style:none;
-    max-width:1200px;
-    margin:0 auto;
-    padding:0 .5rem;
-    gap:.2rem;
+    display:flex; list-style:none; max-width:1200px; margin:0 auto;
+    padding:0 .5rem; gap:.15rem;
   }
   nav a{
-    display:block;
-    padding:.9rem 1rem;
-    color:var(--texto-suave);
-    text-decoration:none;
-    font-size:.9rem;
-    font-weight:600;
-    white-space:nowrap;
-    border-bottom:3px solid transparent;
-    transition:all .2s;
+    display:block; padding:.8rem .9rem; color:var(--texto-suave);
+    text-decoration:none; font-size:.82rem; font-weight:600;
+    white-space:nowrap; border-bottom:3px solid transparent;
+    transition:all .2s; cursor:pointer;
   }
-  nav a:hover{
-    color:var(--azul);
-    background:var(--azul-muy-claro);
-    border-bottom-color:var(--azul-claro);
+  nav a:hover{color:var(--azul); background:var(--azul-muy-claro);}
+  nav a.active{color:var(--azul); border-bottom-color:var(--azul-claro);}
+  nav a.done::after{content:" ✓"; color:var(--verde); font-weight:700;}
+
+  /* PROGRESS BAR */
+  .progress-bar{
+    position:fixed; top:0; left:0; height:3px;
+    background:linear-gradient(90deg,var(--azul),var(--naranja));
+    width:0%; z-index:200; transition:width .3s;
   }
 
-  /* ---------- MAIN ---------- */
-  main{
-    max-width:960px;
-    margin:0 auto;
-    padding:2rem 1.2rem 4rem;
+  /* MAIN */
+  main{flex:1; max-width:920px; margin:0 auto; padding:2rem 1.2rem 4rem; width:100%;}
+
+  .page{display:none; animation:fadeIn .35s ease;}
+  .page.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  section.card{
+    background:#fff; border-radius:var(--radio); box-shadow:var(--sombra);
+    padding:2rem 1.8rem; margin-bottom:1.5rem;
   }
 
-  section{
-    background:#fff;
-    border-radius:var(--radio);
-    box-shadow:var(--sombra);
-    padding:2rem 1.8rem;
-    margin-bottom:2.5rem;
-    scroll-margin-top:90px;
+  /* MISSION BRIEF (home) */
+  .mission{
+    background:linear-gradient(135deg,#0a2a5e,#0d47a1);
+    color:#fff; padding:2.5rem 2rem; border-radius:var(--radio);
+    margin-bottom:1.5rem; position:relative; overflow:hidden;
+  }
+  .mission::before{
+    content:"🔧"; position:absolute; font-size:8rem; opacity:0.06;
+    right:1rem; bottom:-1rem;
+  }
+  .mission h2{font-size:1.6rem; margin-bottom:.8rem; position:relative;}
+  .mission p{font-size:1rem; opacity:.95; margin-bottom:.8rem; position:relative;}
+  .mission .stamp{
+    display:inline-block; border:2px dashed rgba(255,255,255,.4);
+    padding:.4rem .9rem; border-radius:8px; font-size:.8rem;
+    text-transform:uppercase; letter-spacing:1px; margin-top:.5rem;
+    position:relative;
   }
 
-  section > h2{
-    color:var(--azul);
-    font-size:1.7rem;
-    padding-bottom:.6rem;
-    border-bottom:3px solid var(--azul-muy-claro);
-    margin-bottom:1.3rem;
-    display:flex;
-    align-items:center;
-    gap:.6rem;
+  /* HEADINGS */
+  h2.page-title{
+    color:var(--azul); font-size:1.5rem; padding-bottom:.6rem;
+    border-bottom:3px solid var(--azul-muy-claro); margin-bottom:1.2rem;
+    display:flex; align-items:center; gap:.6rem;
   }
-  section > h2 .num{
-    background:var(--azul);
-    color:#fff;
-    width:38px;height:38px;
-    border-radius:50%;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-size:1.1rem;
-    flex-shrink:0;
+  h2.page-title .job{
+    background:var(--naranja); color:#fff; font-size:.7rem;
+    padding:.2rem .6rem; border-radius:12px; text-transform:uppercase;
+    letter-spacing:.5px; font-weight:700;
   }
-
-  h3{
-    color:var(--azul-claro);
-    margin:1.5rem 0 .7rem;
-    font-size:1.2rem;
-  }
-  h4{
-    color:var(--texto);
-    margin:1rem 0 .5rem;
-    font-size:1rem;
-  }
-
+  h3{color:var(--azul-claro); margin:1.4rem 0 .6rem; font-size:1.1rem;}
+  h4{color:var(--texto); margin:1rem 0 .4rem; font-size:1rem;}
   p{margin-bottom:.9rem;}
   ul,ol{margin:.5rem 0 1rem 1.5rem;}
   li{margin-bottom:.4rem;}
 
   code, .formula{
     font-family:'Consolas','Courier New',monospace;
-    background:var(--gris);
-    padding:.15rem .45rem;
-    border-radius:4px;
-    font-size:.95em;
-    color:var(--rojo);
   }
+  code{background:var(--gris); padding:.15rem .4rem; border-radius:4px;
+    font-size:.92em; color:var(--rojo);}
   .formula{
-    display:block;
-    text-align:center;
-    padding:.8rem;
-    margin:1rem 0;
-    font-size:1.1rem;
-    background:var(--azul-muy-claro);
-    color:var(--azul);
-    border-left:4px solid var(--azul);
-    border-radius:6px;
-    font-weight:600;
+    display:block; text-align:center; padding:.85rem; margin:1rem 0;
+    font-size:1.08rem; background:var(--azul-muy-claro); color:var(--azul);
+    border-left:4px solid var(--azul); border-radius:6px; font-weight:600;
   }
 
-  /* ---------- CAJAS ESPECIALES ---------- */
-  .box{
-    border-radius:8px;
-    padding:1rem 1.2rem;
-    margin:1.2rem 0;
-    border-left:5px solid;
-  }
-  .box-tip{background:var(--verde-claro);border-color:var(--verde);}
+  /* BOXES */
+  .box{border-radius:8px; padding:1rem 1.2rem; margin:1.2rem 0;
+    border-left:5px solid;}
+  .box-tip{background:var(--verde-claro); border-color:var(--verde);}
   .box-tip strong{color:var(--verde);}
-  .box-warn{background:var(--naranja-claro);border-color:var(--naranja);}
+  .box-warn{background:var(--naranja-claro); border-color:var(--naranja);}
   .box-warn strong{color:var(--naranja);}
-  .box-info{background:var(--azul-muy-claro);border-color:var(--azul-claro);}
+  .box-info{background:var(--azul-muy-claro); border-color:var(--azul-claro);}
   .box-info strong{color:var(--azul);}
 
-  /* ---------- TABLAS ---------- */
-  table{
-    width:100%;
-    border-collapse:collapse;
-    margin:1rem 0;
-    font-size:.92rem;
-  }
-  th,td{
-    border:1px solid var(--gris-borde);
-    padding:.6rem .7rem;
-    text-align:left;
-  }
-  th{
-    background:var(--azul);
-    color:#fff;
-    font-weight:600;
-  }
+  /* TABLES */
+  table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem;}
+  th,td{border:1px solid var(--gris-borde); padding:.55rem .7rem; text-align:left;}
+  th{background:var(--azul); color:#fff; font-weight:600;}
   tr:nth-child(even) td{background:#fafafa;}
 
-  /* ---------- ACTIVIDADES ---------- */
-  .actividad{
-    background:linear-gradient(135deg,#f8fbff 0%,#eef5ff 100%);
-    border:2px solid var(--azul-claro);
-    border-radius:var(--radio);
-    padding:1.3rem 1.4rem;
-    margin:1.5rem 0;
-  }
-  .actividad > h4{
-    color:var(--azul);
-    font-size:1.05rem;
-    margin-top:0;
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-  }
-  .actividad > h4::before{
-    content:"🎯";
-    font-size:1.2rem;
-  }
-
-  .simulacion{
+  /* ACTIVITY BLOCKS */
+  .sim{
     background:linear-gradient(135deg,#fff8f0 0%,#ffefe0 100%);
-    border:2px solid var(--naranja);
-    border-radius:var(--radio);
-    padding:1.3rem 1.4rem;
-    margin:1.5rem 0;
+    border:2px solid var(--naranja); border-radius:var(--radio);
+    padding:1.2rem 1.3rem; margin:1.4rem 0;
   }
-  .simulacion > h4{
-    color:var(--naranja);
-    font-size:1.05rem;
-    margin-top:0;
-    display:flex;
-    align-items:center;
-    gap:.5rem;
+  .sim > h4{
+    color:var(--naranja); font-size:1rem; margin-top:0;
+    display:flex; align-items:center; gap:.5rem;
   }
-  .simulacion > h4::before{
-    content:"🔬";
-    font-size:1.2rem;
-  }
+  .sim > h4::before{content:"🔬"; font-size:1.1rem;}
 
-  .btn{
-    display:inline-block;
-    background:var(--azul);
-    color:#fff;
-    padding:.6rem 1.2rem;
-    border-radius:6px;
-    text-decoration:none;
-    font-weight:600;
-    font-size:.9rem;
-    margin:.3rem .3rem .3rem 0;
-    transition:all .2s;
-    border:none;
-    cursor:pointer;
-  }
-  .btn:hover{background:var(--azul-claro);transform:translateY(-2px);box-shadow:0 4px 10px rgba(13,71,161,.3);}
-  .btn-naranja{background:var(--naranja);}
-  .btn-naranja:hover{background:#f57c00;box-shadow:0 4px 10px rgba(239,108,0,.3);}
-  .btn-verde{background:var(--verde);}
-  .btn-verde:hover{background:#388e3c;box-shadow:0 4px 10px rgba(46,125,50,.3);}
-
-  /* ---------- QUIZ ---------- */
   .quiz{
-    background:#f9f9f9;
-    border:1px solid var(--gris-borde);
-    border-radius:var(--radio);
-    padding:1.2rem 1.4rem;
-    margin:1.5rem 0;
+    background:#f9f9f9; border:1px solid var(--gris-borde);
+    border-radius:var(--radio); padding:1.2rem 1.3rem; margin:1.4rem 0;
   }
   .quiz > h4{
-    color:var(--verde);
-    margin-top:0;
-    display:flex;
-    align-items:center;
-    gap:.5rem;
+    color:var(--verde); margin-top:0;
+    display:flex; align-items:center; gap:.5rem;
   }
-  .quiz > h4::before{content:"✅";font-size:1.2rem;}
+  .quiz > h4::before{content:"✅"; font-size:1.1rem;}
 
   .question{
-    margin-bottom:1.2rem;
-    padding-bottom:1rem;
+    margin-bottom:1.1rem; padding-bottom:.9rem;
     border-bottom:1px dashed var(--gris-borde);
   }
-  .question:last-of-type{border-bottom:none;padding-bottom:0;}
-  .question p{font-weight:600;margin-bottom:.5rem;color:#333;}
+  .question:last-of-type{border-bottom:none; padding-bottom:0;}
+  .question p{font-weight:600; margin-bottom:.5rem; color:#333;}
   .question label{
-    display:block;
-    padding:.4rem .6rem;
-    margin:.25rem 0;
-    border-radius:6px;
-    cursor:pointer;
-    transition:background .15s;
+    display:block; padding:.4rem .6rem; margin:.2rem 0;
+    border-radius:6px; cursor:pointer; transition:background .15s;
+    font-size:.92rem;
   }
   .question label:hover{background:var(--azul-muy-claro);}
   .question input[type="radio"]{margin-right:.5rem;}
 
-  .feedback{
-    margin-top:.6rem;
-    font-weight:600;
-    font-size:.9rem;
-    display:none;
-  }
-  .feedback.correct{color:var(--verde);display:block;}
-  .feedback.incorrect{color:var(--rojo);display:block;}
+  .feedback{margin-top:.5rem; font-weight:600; font-size:.88rem;}
+  .feedback.correct{color:var(--verde);}
+  .feedback.incorrect{color:var(--rojo);}
 
+  /* BUTTONS */
+  .btn{
+    display:inline-block; background:var(--azul); color:#fff;
+    padding:.6rem 1.2rem; border-radius:6px; text-decoration:none;
+    font-weight:600; font-size:.88rem; margin:.3rem .3rem .3rem 0;
+    transition:all .2s; border:none; cursor:pointer;
+  }
+  .btn:hover{background:var(--azul-claro); transform:translateY(-2px);
+    box-shadow:0 4px 10px rgba(13,71,161,.3);}
+  .btn-naranja{background:var(--naranja);}
+  .btn-naranja:hover{background:#f57c00; box-shadow:0 4px 10px rgba(239,108,0,.3);}
+  .btn-verde{background:var(--verde);}
+  .btn-verde:hover{background:#388e3c; box-shadow:0 4px 10px rgba(46,125,50,.3);}
   .btn-check{
-    background:var(--verde);
-    color:#fff;
-    padding:.6rem 1.4rem;
-    border:none;
-    border-radius:6px;
-    font-weight:600;
-    cursor:pointer;
-    font-size:.9rem;
-    transition:all .2s;
+    background:var(--verde); color:#fff; padding:.6rem 1.4rem;
+    border:none; border-radius:6px; font-weight:600; cursor:pointer;
+    font-size:.88rem; transition:all .2s;
   }
   .btn-check:hover{background:#388e3c;}
 
   .resultado{
-    margin-top:1rem;
-    padding:.8rem 1rem;
-    border-radius:6px;
-    font-weight:600;
-    text-align:center;
-    display:none;
+    margin-top:1rem; padding:.8rem 1rem; border-radius:6px;
+    font-weight:600; text-align:center; display:none;
   }
-  .resultado.ok{background:var(--verde-claro);color:var(--verde);display:block;}
-  .resultado.ko{background:var(--rojo-claro);color:var(--rojo);display:block;}
+  .resultado.ok{background:var(--verde-claro); color:var(--verde); display:block;}
+  .resultado.ko{background:var(--rojo-claro); color:var(--rojo); display:block;}
 
-  /* ---------- PROYECTO ---------- */
+  /* PAGE NAVIGATION (bottom of each page) */
+  .page-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:2rem; padding-top:1.5rem;
+    border-top:2px solid var(--gris-borde); gap:1rem; flex-wrap:wrap;
+  }
+  .page-nav .spacer{flex:1;}
+
+  /* PROJECT CARDS */
   .reto{
-    background:#fff;
-    border:2px dashed var(--azul-claro);
-    border-radius:var(--radio);
-    padding:1.2rem 1.4rem;
-    margin:1rem 0;
+    background:#fff; border:2px dashed var(--azul-claro);
+    border-radius:var(--radio); padding:1.2rem 1.3rem; margin:1rem 0;
     transition:all .2s;
   }
-  .reto:hover{border-style:solid;box-shadow:0 6px 16px rgba(13,71,161,.12);}
-  .reto h4{color:var(--azul);margin-top:0;}
+  .reto:hover{border-style:solid; box-shadow:0 6px 16px rgba(13,71,161,.12);}
+  .reto h4{color:var(--azul); margin-top:0;}
   .reto .nivel{
-    display:inline-block;
-    background:var(--naranja);
-    color:#fff;
-    padding:.15rem .6rem;
-    border-radius:12px;
-    font-size:.75rem;
-    font-weight:600;
-    margin-left:.5rem;
-    vertical-align:middle;
+    display:inline-block; background:var(--naranja); color:#fff;
+    padding:.15rem .6rem; border-radius:12px; font-size:.72rem;
+    font-weight:600; margin-left:.5rem; vertical-align:middle;
+    text-transform:uppercase; letter-spacing:.5px;
   }
   .nivel-basico{background:var(--verde) !important;}
   .nivel-medio{background:var(--naranja) !important;}
   .nivel-avanzado{background:var(--rojo) !important;}
 
-  /* ---------- PROGRESO ---------- */
-  .progress-bar{
-    position:fixed;
-    top:0;left:0;
-    height:3px;
-    background:linear-gradient(90deg,var(--azul),var(--naranja));
-    width:0%;
-    z-index:200;
-    transition:width .1s;
+  /* HOME GRID */
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:1rem; margin:1.5rem 0;
   }
+  .grid .job-card{
+    background:#fff; border:2px solid var(--gris-borde);
+    border-radius:var(--radio); padding:1.1rem 1.2rem;
+    cursor:pointer; transition:all .2s; text-decoration:none;
+    color:inherit; display:block;
+  }
+  .grid .job-card:hover{
+    border-color:var(--azul-claro); transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(13,71,161,.12);
+  }
+  .grid .job-card .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--azul); color:#fff; width:32px; height:32px;
+    border-radius:50%; font-weight:700; font-size:.9rem; margin-bottom:.5rem;
+  }
+  .grid .job-card h4{margin:.2rem 0 .4rem; color:var(--azul); font-size:1rem;}
+  .grid .job-card p{font-size:.83rem; color:var(--texto-suave); margin:0;}
+  .grid .job-card.done{border-color:var(--verde);}
+  .grid .job-card.done .num{background:var(--verde);}
 
-  /* ---------- FOOTER ---------- */
+  /* FOOTER */
   footer{
-    background:#263238;
-    color:#b0bec5;
-    text-align:center;
-    padding:1.5rem;
-    font-size:.85rem;
+    background:#263238; color:#b0bec5; text-align:center;
+    padding:1.4rem; font-size:.82rem;
   }
-  footer a{color:#90caf9;text-decoration:none;}
+  footer a{color:#90caf9; text-decoration:none;}
 
-  /* ---------- RESPONSIVE ---------- */
   @media (max-width:640px){
-    section{padding:1.4rem 1.1rem;}
-    section > h2{font-size:1.35rem;}
-    nav a{font-size:.8rem;padding:.7rem .7rem;}
-    header{padding:2rem 1rem 1.5rem;}
-  }
-
-  /* ---------- PRINT ---------- */
-  @media print{
-    nav,.progress-bar,.btn{display:none;}
-    section{box-shadow:none;page-break-inside:avoid;}
+    section.card{padding:1.4rem 1.1rem;}
+    header{padding:1.6rem 1rem;}
+    .mission{padding:1.6rem 1.3rem;}
+    nav a{font-size:.75rem; padding:.6rem .6rem;}
+    main{padding:1.2rem .8rem 3rem;}
   }
 </style>
 </head>
@@ -414,751 +290,983 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <header>
-  <h1>⚡ Laboratorio Virtual de Electrónica Analógica</h1>
-  <p>Tecnología · 4º ESO</p>
-  <span class="badge">Investiga · Comprueba · Aplica</span>
+  <h1>⚡ CircuitWorks · Analog Electronics Lab</h1>
+  <p class="tagline">"Every broken device has a story. Learn to read it."</p>
+  <span class="rank">Rank: <strong id="rankLabel">Rookie</strong></span>
 </header>
 
 <nav>
-  <ul>
-    <li><a href="#intro">Inicio</a></li>
-    <li><a href="#conceptos">1. Conceptos</a></li>
-    <li><a href="#resistencias">2. Resistencias</a></li>
-    <li><a href="#condensadores">3. Condensadores</a></li>
-    <li><a href="#diodos">4. Diodos</a></li>
-    <li><a href="#transistores">5. Transistores</a></li>
-    <li><a href="#fuentes">6. Fuentes</a></li>
-    <li><a href="#ci555">7. CI 555</a></li>
-    <li><a href="#ao741">8. AO 741</a></li>
-    <li><a href="#proyecto">Proyecto</a></li>
+  <ul id="navList">
+    <li><a data-page="home" class="active">🏠 Base</a></li>
+    <li><a data-page="fundamentals">01 · Fundamentals</a></li>
+    <li><a data-page="resistors">02 · Resistors</a></li>
+    <li><a data-page="capacitors">03 · Capacitors</a></li>
+    <li><a data-page="diodes">04 · Diodes</a></li>
+    <li><a data-page="transistors">05 · Transistors</a></li>
+    <li><a data-page="supplies">06 · Power Supplies</a></li>
+    <li><a data-page="timer">07 · 555 Timer</a></li>
+    <li><a data-page="opamp">08 · Op-Amp 741</a></li>
+    <li><a data-page="project">🎓 Final Project</a></li>
   </ul>
 </nav>
 
 <main>
 
-<!-- ============================ INTRO ============================ -->
-<section id="intro">
-  <h2><span class="num">★</span>Bienvenido/a al laboratorio</h2>
-  <p>En esta unidad vas a convertirte en <strong>ingeniero/a electrónico/a</strong>. No vas a limitarte a leer teoría: vas a <strong>investigar</strong> los componentes analógicos básicos, <strong>comprobar</strong> su funcionamiento en simuladores online y <strong>aplicar</strong> lo aprendido diseñando circuitos que resuelven problemas reales.</p>
+<!-- =====================================================
+     HOME
+===================================================== -->
+<div class="page active" id="home">
 
-  <div class="box box-info">
-    <strong>¿Cómo funciona este sitio?</strong>
+  <div class="mission">
+    <h2>Welcome to CircuitWorks</h2>
+    <p>You've just been hired as a <strong>junior technician</strong> at CircuitWorks — a repair shop that brings vintage radios, old arcade cabinets, and forgotten gadgets back to life.</p>
+    <p>Your mentor, <strong>Chief Engineer Vega</strong>, has left you a stack of job tickets. Each one is a broken device that needs fixing. To fix them, you'll need to understand the analog electronic components inside.</p>
+    <p>Complete every job, pass every check, and you'll earn your <strong>Master Technician badge</strong>.</p>
+    <span class="stamp">🔧 Shift starts now</span>
+  </div>
+
+  <section class="card">
+    <h2 class="page-title">Your job board</h2>
+    <p>Each job is a module. Click one to start your shift. You'll need to <strong>read the theory</strong>, <strong>pass the check</strong>, and <strong>run the simulation</strong> before moving on.</p>
+
+    <div class="grid" id="homeGrid">
+      <a class="job-card" data-page="fundamentals">
+        <span class="num">01</span>
+        <h4>The Flickering Lights</h4>
+        <p>Master voltage, current, and Ohm's law before touching a single component.</p>
+      </a>
+      <a class="job-card" data-page="resistors">
+        <span class="num">02</span>
+        <h4>The Silent Guitar Pedal</h4>
+        <p>Resistors control the flow. Fix the LED and tame the signal.</p>
+      </a>
+      <a class="job-card" data-page="capacitors">
+        <span class="num">03</span>
+        <h4>The Dead Camera Flash</h4>
+        <p>Learn to store and release energy in a burst.</p>
+      </a>
+      <a class="job-card" data-page="diodes">
+        <span class="num">04</span>
+        <h4>The Fried Phone Charger</h4>
+        <p>One-way valves for electricity. Convert AC to DC.</p>
+      </a>
+      <a class="job-card" data-page="transistors">
+        <span class="num">05</span>
+        <h4>The Mute Radio</h4>
+        <p>Switch and amplify — the two superpowers of electronics.</p>
+      </a>
+      <a class="job-card" data-page="supplies">
+        <span class="num">06</span>
+        <h4>The Noisy Bench Supply</h4>
+        <p>From wall socket to clean DC — the full journey.</p>
+      </a>
+      <a class="job-card" data-page="timer">
+        <span class="num">07</span>
+        <h4>The Blinking Turn Signal</h4>
+        <p>Control time itself with the legendary 555 chip.</p>
+      </a>
+      <a class="job-card" data-page="opamp">
+        <span class="num">08</span>
+        <h4>The Dusk Sensor</h4>
+        <p>Compare voltages and let the circuit decide.</p>
+      </a>
+    </div>
+
+    <div class="box box-tip">
+      <strong>Tools of the trade:</strong> you'll use two online simulators throughout your shift.
+      <br>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad Simulator ↗</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad Circuits ↗</a>
+    </div>
+
+    <div class="box box-info">
+      <strong>How to earn your badge:</strong> complete the 8 jobs, pass each Check with at least 60%, and finish the Final Project. Your rank updates as you go — you can see it at the top of the page.
+    </div>
+  </section>
+
+</div>
+
+<!-- =====================================================
+     01 FUNDAMENTALS
+===================================================== -->
+<div class="page" id="fundamentals">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 01</span>The Flickering Lights</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "The workshop lights flicker every time we turn on the soldering iron. Nobody knows why. — Vega"
+      <br><br>
+      <em>Before you can fix anything, you need to speak the language of electricity.</em>
+    </div>
+
+    <h3>Basic electrical quantities</h3>
+    <p>Every circuit is described by three basic quantities, plus power.</p>
+
+    <table>
+      <thead><tr><th>Quantity</th><th>Symbol</th><th>Unit (SI)</th><th>Instrument</th></tr></thead>
+      <tbody>
+        <tr><td>Voltage / potential difference</td><td>V</td><td>Volt (V)</td><td>Voltmeter (in parallel)</td></tr>
+        <tr><td>Current intensity</td><td>I</td><td>Ampere (A)</td><td>Ammeter (in series)</td></tr>
+        <tr><td>Resistance</td><td>R</td><td>Ohm (Ω)</td><td>Ohmmeter (circuit disconnected)</td></tr>
+        <tr><td>Electrical power</td><td>P</td><td>Watt (W)</td><td>Wattmeter</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Power</strong> is energy per unit of time.</p>
+    <div class="formula">P(W) = V(V) × I(A)</div>
+
+    <h3>Ohm's Law</h3>
+    <p>The current flowing through a conductor is directly proportional to the voltage across it and inversely proportional to its resistance.</p>
+    <div class="formula">I = V / R</div>
+
+    <h3>Series, parallel, and mixed circuits</h3>
+
+    <h4>Series circuit</h4>
     <ul>
-      <li>📖 <strong>Lee</strong> la teoría resumida de cada apartado (basada en tu libro de texto).</li>
-      <li>✅ <strong>Comprueba</strong> lo que has entendido con los cuestionarios autoevaluables.</li>
-      <li>🔬 <strong>Simula</strong> los circuitos en <em>Falstad</em> o <em>Tinkercad</em> siguiendo las instrucciones.</li>
-      <li>🎯 <strong>Aplica</strong> lo aprendido en el proyecto final.</li>
+      <li><strong>Equivalent resistance:</strong> \( R_t = R_1 + R_2 + \dots + R_n \)</li>
+      <li><strong>Current:</strong> the same through every element (\( I_t = I_1 = I_2 = \dots \))</li>
+      <li><strong>Voltage:</strong> splits across elements. It acts as a <em>voltage divider</em>.</li>
+      <li><strong>Power:</strong> generated equals consumed.</li>
     </ul>
-  </div>
 
-  <h3>Herramientas que vas a usar</h3>
-  <ul>
-    <li><strong>Falstad Circuit Simulator</strong> — simulador de circuitos online, rápido y muy visual. <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad ↗</a></li>
-    <li><strong>Tinkercad Circuits</strong> — simulador con protoboard y componentes reales, ideal para montajes con Arduino o con breadboard. <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Abrir Tinkercad ↗</a></li>
-  </ul>
+    <h4>Parallel circuit</h4>
+    <ul>
+      <li><strong>Equivalent resistance:</strong> \( 1/R_t = 1/R_1 + 1/R_2 + \dots \)</li>
+      <li><strong>Voltage:</strong> the same across every element.</li>
+      <li><strong>Current:</strong> splits. It acts as a <em>current divider</em>.</li>
+    </ul>
 
-  <div class="box box-tip">
-    <strong>Consejo:</strong> trabaja por parejas. Uno lee y el otro manipula el simulador, y luego intercambiad los roles. Al final de cada apartado, anotad en vuestro cuaderno las conclusiones.
-  </div>
-</section>
+    <h4>Mixed circuit</h4>
+    <p>Combines series and parallel branches. Solve it in stages: first the parallel blocks, then the resulting series.</p>
 
-<!-- ============================ 1. CONCEPTOS ============================ -->
-<section id="conceptos">
-  <h2><span class="num">1</span>Conceptos fundamentales previos</h2>
+    <h3>Resistor color code</h3>
+    <table>
+      <thead><tr><th>Color</th><th>1st digit</th><th>2nd digit</th><th>Multiplier</th><th>Tolerance</th></tr></thead>
+      <tbody>
+        <tr><td>Black</td><td>0</td><td>0</td><td>×1</td><td>—</td></tr>
+        <tr><td>Brown</td><td>1</td><td>1</td><td>×10</td><td>±1%</td></tr>
+        <tr><td>Red</td><td>2</td><td>2</td><td>×100</td><td>±2%</td></tr>
+        <tr><td>Orange</td><td>3</td><td>3</td><td>×1 000</td><td>—</td></tr>
+        <tr><td>Yellow</td><td>4</td><td>4</td><td>×10 000</td><td>—</td></tr>
+        <tr><td>Green</td><td>5</td><td>5</td><td>×100 000</td><td>—</td></tr>
+        <tr><td>Blue</td><td>6</td><td>6</td><td>×1 000 000</td><td>—</td></tr>
+        <tr><td>Gold</td><td>—</td><td>—</td><td>×0.1</td><td>±5%</td></tr>
+        <tr><td>Silver</td><td>—</td><td>—</td><td>×0.01</td><td>±10%</td></tr>
+      </tbody>
+    </table>
 
-  <h3>1.1 Magnitudes eléctricas básicas</h3>
-  <p>Las tres magnitudes básicas de un circuito son el <strong>voltaje</strong>, la <strong>intensidad</strong> y la <strong>resistencia</strong>. A ellas se añade la <strong>potencia</strong>.</p>
+    <div class="quiz" data-quiz data-module="fundamentals">
+      <h4>Check your understanding</h4>
 
-  <table>
-    <thead>
-      <tr><th>Magnitud</th><th>Símbolo</th><th>Unidad (SI)</th><th>Instrumento</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Voltaje / tensión / d.d.p.</td><td>V</td><td>Voltio (V)</td><td>Voltímetro (en paralelo)</td></tr>
-      <tr><td>Intensidad de corriente</td><td>I</td><td>Amperio (A)</td><td>Amperímetro (en serie)</td></tr>
-      <tr><td>Resistencia</td><td>R</td><td>Ohmio (Ω)</td><td>Óhmetro (circuito desconectado)</td></tr>
-      <tr><td>Potencia eléctrica</td><td>P</td><td>Vatio (W)</td><td>Vatímetro</td></tr>
-    </tbody>
-  </table>
+      <div class="question" data-answer="b">
+        <p>1. Ohm's law is expressed as:</p>
+        <label><input type="radio" name="f1" value="a"> V = I · R²</label>
+        <label><input type="radio" name="f1" value="b"> I = V / R</label>
+        <label><input type="radio" name="f1" value="c"> R = I · V</label>
+      </div>
 
-  <p><strong>Potencia eléctrica:</strong> energía por unidad de tiempo.</p>
-  <div class="formula">P(W) = V(V) × I(A) &nbsp;&nbsp;|&nbsp;&nbsp; P(W) = E(J) / t(s)</div>
+      <div class="question" data-answer="c">
+        <p>2. In a series circuit, which quantity is the same through every element?</p>
+        <label><input type="radio" name="f2" value="a"> Voltage</label>
+        <label><input type="radio" name="f2" value="b"> Power</label>
+        <label><input type="radio" name="f2" value="c"> Current</label>
+      </div>
 
-  <h3>1.2 La ley de Ohm</h3>
-  <p>La intensidad que circula por un conductor es directamente proporcional a la tensión e inversamente proporcional a la resistencia.</p>
-  <div class="formula">I = V / R</div>
+      <div class="question" data-answer="a">
+        <p>3. A 10 Ω resistor has 2 A flowing through it. What is the voltage across it?</p>
+        <label><input type="radio" name="f3" value="a"> 20 V</label>
+        <label><input type="radio" name="f3" value="b"> 5 V</label>
+        <label><input type="radio" name="f3" value="c"> 0.2 V</label>
+      </div>
 
-  <h3>1.3 Circuitos serie, paralelo y mixto</h3>
+      <div class="question" data-answer="b">
+        <p>4. What is the value of a resistor with bands red-red-brown-gold?</p>
+        <label><input type="radio" name="f4" value="a"> 22 Ω ± 5%</label>
+        <label><input type="radio" name="f4" value="b"> 220 Ω ± 5%</label>
+        <label><input type="radio" name="f4" value="c"> 2 200 Ω ± 5%</label>
+      </div>
 
-  <h4>Circuito en serie</h4>
-  <ul>
-    <li><strong>Resistencia equivalente:</strong> \( R_t = R_1 + R_2 + \dots + R_n \)</li>
-    <li><strong>Intensidad:</strong> la misma por todos los elementos (\( I_t = I_1 = I_2 = \dots \))</li>
-    <li><strong>Tensión:</strong> se reparte (\( V_t = V_1 + V_2 + \dots \)). Es un <em>divisor de tensión</em>.</li>
-    <li><strong>Potencia:</strong> la generada es igual a la consumida.</li>
-  </ul>
-
-  <h4>Circuito en paralelo</h4>
-  <ul>
-    <li><strong>Resistencia equivalente:</strong> \( 1/R_t = 1/R_1 + 1/R_2 + \dots \)</li>
-    <li><strong>Tensión:</strong> la misma en todos los elementos (\( V_t = V_1 = V_2 = \dots \))</li>
-    <li><strong>Intensidad:</strong> se reparte. Es un <em>divisor de intensidad</em>.</li>
-  </ul>
-
-  <h4>Circuito mixto</h4>
-  <p>Combina tramos en serie y en paralelo. Se resuelve por partes: primero los paralelos, luego las series resultantes.</p>
-
-  <h3>1.4 Código de colores de las resistencias</h3>
-  <table>
-    <thead>
-      <tr><th>Color</th><th>1ª cifra</th><th>2ª cifra</th><th>Multiplicador</th><th>Tolerancia</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Negro</td><td>0</td><td>0</td><td>×1</td><td>—</td></tr>
-      <tr><td>Marrón</td><td>1</td><td>1</td><td>×10</td><td>±1%</td></tr>
-      <tr><td>Rojo</td><td>2</td><td>2</td><td>×100</td><td>±2%</td></tr>
-      <tr><td>Naranja</td><td>3</td><td>3</td><td>×1 000</td><td>—</td></tr>
-      <tr><td>Amarillo</td><td>4</td><td>4</td><td>×10 000</td><td>—</td></tr>
-      <tr><td>Verde</td><td>5</td><td>5</td><td>×100 000</td><td>—</td></tr>
-      <tr><td>Azul</td><td>6</td><td>6</td><td>×1 000 000</td><td>—</td></tr>
-      <tr><td>Violeta</td><td>7</td><td>7</td><td>—</td><td>—</td></tr>
-      <tr><td>Gris</td><td>8</td><td>8</td><td>—</td><td>—</td></tr>
-      <tr><td>Blanco</td><td>9</td><td>9</td><td>—</td><td>—</td></tr>
-      <tr><td>Oro</td><td>—</td><td>—</td><td>×0,1</td><td>±5%</td></tr>
-      <tr><td>Plata</td><td>—</td><td>—</td><td>×0,01</td><td>±10%</td></tr>
-    </tbody>
-  </table>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. La ley de Ohm se expresa como:</p>
-      <label><input type="radio" name="q1" value="a"> V = I · R²</label>
-      <label><input type="radio" name="q1" value="b"> I = V / R</label>
-      <label><input type="radio" name="q1" value="c"> R = I · V</label>
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
     </div>
 
-    <div class="question" data-answer="c">
-      <p>2. En un circuito en serie, ¿qué magnitud es la misma en todos los elementos?</p>
-      <label><input type="radio" name="q2" value="a"> La tensión</label>
-      <label><input type="radio" name="q2" value="b"> La potencia</label>
-      <label><input type="radio" name="q2" value="c"> La intensidad</label>
+    <div class="sim">
+      <h4>Simulation: prove Ohm's Law yourself</h4>
+      <ol>
+        <li>Open <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad ↗</a>.</li>
+        <li>Drag a <strong>battery</strong> (Add → Inputs and Sources → DC Voltage Source).</li>
+        <li>Add a <strong>resistor</strong> (Add → Passive Components → Resistor) in series.</li>
+        <li>Close the circuit with wires.</li>
+        <li>Add an <strong>ammeter</strong> in series and a <strong>voltmeter</strong> across the resistor.</li>
+        <li>Set the battery to 10 V and the resistor to 100 Ω. Note the current. Repeat with 200 Ω, 500 Ω and 1 kΩ. Does I = V/R hold?</li>
+      </ol>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>3. Una resistencia de 10 Ω recorre una intensidad de 2 A. ¿Cuál es la tensión?</p>
-      <label><input type="radio" name="q3" value="a"> 20 V</label>
-      <label><input type="radio" name="q3" value="b"> 5 V</label>
-      <label><input type="radio" name="q3" value="c"> 0,2 V</label>
+    <div class="page-nav">
+      <a class="btn" data-page="home">← Back to Base</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="resistors">Next job: Resistors →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     02 RESISTORS
+===================================================== -->
+<div class="page" id="resistors">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 02</span>The Silent Guitar Pedal</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "A customer brought in a vintage fuzz pedal. The LED doesn't light up, and the output is way too loud. I suspect the resistors. — Vega"
+      <br><br>
+      <em>Resistors oppose the flow of current. In electronics they do two key jobs: divide voltage and limit current.</em>
     </div>
 
-    <div class="question" data-answer="b">
-      <p>4. ¿Cuál es el valor de una resistencia con franjas rojo-rojo-marrón-oro?</p>
-      <label><input type="radio" name="q4" value="a"> 22 Ω ± 5%</label>
-      <label><input type="radio" name="q4" value="b"> 220 Ω ± 5%</label>
-      <label><input type="radio" name="q4" value="c"> 2 200 Ω ± 5%</label>
+    <h3>Voltage divider</h3>
+    <p>Two or more resistors in series with a power source. The voltage across each resistor is a fraction of the supply.</p>
+    <div class="formula">V_AB = V · R₁ / (R₁ + R₂)</div>
+    <p>It's used to feed any component with exactly the voltage it needs.</p>
+
+    <h3>Current limiter</h3>
+    <p>A resistor in series with another component (for example, an LED) to reduce the current flowing through it.</p>
+    <div class="formula">R = (V − V_LED) / I</div>
+
+    <div class="box box-warn">
+      <strong>Watch out!</strong> An LED must always be connected in series with a current-limiting resistor. Otherwise it will burn out.
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
+    <div class="box box-tip">
+      <strong>Good to know:</strong> commercial resistors follow standard series (E6, E12, E24…). Series E6 has six values: 1.0 · 1.5 · 2.2 · 3.3 · 4.7 · 6.8. Each value can come in Ω, kΩ or MΩ.
+    </div>
 
-  <div class="simulacion">
-    <h4>Simula: comprueba la ley de Ohm en Falstad</h4>
-    <p><strong>Objetivo:</strong> verificar experimentalmente que I = V / R.</p>
+    <div class="quiz" data-quiz data-module="resistors">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="b">
+        <p>1. In a voltage divider with R₁ = 1 kΩ, R₂ = 2 kΩ fed by 9 V, what is the voltage across R₂?</p>
+        <label><input type="radio" name="r1" value="a"> 3 V</label>
+        <label><input type="radio" name="r1" value="b"> 6 V</label>
+        <label><input type="radio" name="r1" value="c"> 4.5 V</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>2. What is the purpose of a current-limiting resistor in series with an LED?</p>
+        <label><input type="radio" name="r2" value="a"> Increase the LED brightness</label>
+        <label><input type="radio" name="r2" value="b"> Change the LED color</label>
+        <label><input type="radio" name="r2" value="c"> Keep the current low enough not to damage the LED</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>3. With V = 9 V, R₁ = 470 Ω and R₂ = 220 Ω, what is the voltage across R₂?</p>
+        <label><input type="radio" name="r3" value="a"> ≈ 2.86 V</label>
+        <label><input type="radio" name="r3" value="b"> ≈ 6.14 V</label>
+        <label><input type="radio" name="r3" value="c"> 9 V</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
+    </div>
+
+    <div class="sim">
+      <h4>Simulation: voltage divider + LED limiter</h4>
+      <p><strong>Task A — Voltage divider:</strong> in Falstad, build a 9 V battery with two resistors in series (470 Ω and 220 Ω). Measure the voltage across each one and compare with your calculations.</p>
+      <p><strong>Task B — LED limiter:</strong> in Tinkercad, build a 5 V battery, a resistor and an LED in series. Calculate R so the current is 20 mA (V_LED = 2 V). Check your answer in the simulator.</p>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="fundamentals">← Fundamentals</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="capacitors">Next job: Capacitors →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     03 CAPACITORS
+===================================================== -->
+<div class="page" id="capacitors">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 03</span>The Dead Camera Flash</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "An old film camera flash won't fire. It needs to store energy and release it in a burst. That's a capacitor's job. — Vega"
+      <br><br>
+      <em>A capacitor stores electrical energy when charging and gives it back when discharging.</em>
+    </div>
+
+    <h3>What capacitors do</h3>
+    <ul>
+      <li><strong>Timing circuits:</strong> charging and discharging take time when there is a resistor in series.</li>
+      <li><strong>Filtering</strong> in power supplies (we'll see this in Job 06).</li>
+    </ul>
+
+    <h3>Timing circuits</h3>
+    <p>With a resistor in series, the charge and discharge are slowed down. The characteristic time is:</p>
+    <div class="formula">t_c = t_d = 5 · R · C</div>
+    <p>where R is in ohms, C is in farads, and the factor 5 means the capacitor is considered fully charged/discharged after five time constants.</p>
+
+    <h3>Units of capacitance</h3>
+    <ul>
+      <li>Microfarad (μF): 1 μF = 10⁻⁶ F</li>
+      <li>Nanofarad (nF): 1 nF = 10⁻⁹ F</li>
+      <li>Picofarad (pF): 1 pF = 10⁻¹² F</li>
+    </ul>
+
+    <div class="box box-warn">
+      <strong>Safety:</strong> large capacitors can stay charged and discharge through your body. Always discharge them through a resistor — never a short circuit.
+    </div>
+
+    <div class="quiz" data-quiz data-module="capacitors">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="b">
+        <p>1. What is the main function of a capacitor in DC?</p>
+        <label><input type="radio" name="c1" value="a"> Amplify current</label>
+        <label><input type="radio" name="c1" value="b"> Store electrical energy</label>
+        <label><input type="radio" name="c1" value="c"> Rectify alternating current</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>2. How long does a 100 μF capacitor take to charge through a 10 kΩ resistor?</p>
+        <label><input type="radio" name="c2" value="a"> 5 seconds</label>
+        <label><input type="radio" name="c2" value="b"> 0.5 seconds</label>
+        <label><input type="radio" name="c2" value="c"> 50 seconds</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>3. 1 μF is equal to:</p>
+        <label><input type="radio" name="c3" value="a"> 10⁻³ F</label>
+        <label><input type="radio" name="c3" value="b"> 10⁻⁹ F</label>
+        <label><input type="radio" name="c3" value="c"> 10⁻⁶ F</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
+    </div>
+
+    <div class="sim">
+      <h4>Simulation: charge and discharge a capacitor</h4>
+      <ol>
+        <li>In <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad ↗</a>, build: 9 V battery + switch + 10 kΩ resistor + 100 μF capacitor.</li>
+        <li>Place the oscilloscope probe across the capacitor.</li>
+        <li>Close the switch and watch the charging curve. How long until it reaches 99% of the supply voltage?</li>
+        <li>Change R to 20 kΩ and to 5 kΩ. How does the charging time change?</li>
+        <li>Verify that t = 5·R·C holds.</li>
+      </ol>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="resistors">← Resistors</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="diodes">Next job: Diodes →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     04 DIODES
+===================================================== -->
+<div class="page" id="diodes">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 04</span>The Fried Phone Charger</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "A phone charger died. The diodes that convert AC to DC have burned out. Diodes are one-way valves — master them and you control the flow. — Vega"
+      <br><br>
+      <em>A diode is a semiconductor that allows current only in the anode → cathode direction (forward bias) and blocks it in the opposite direction (reverse bias).</em>
+    </div>
+
+    <h3>Rectification</h3>
+    <p>The main use of a diode is <strong>rectifying AC</strong>: turning it into DC by removing or flipping the negative half of the wave. This is used in power supplies.</p>
+    <ul>
+      <li><strong>Half-wave rectifier:</strong> one diode. Only lets positive half-cycles through.</li>
+      <li><strong>Bridge rectifier:</strong> four diodes. Uses both half-cycles (pulsating DC).</li>
+    </ul>
+
+    <h3>Zener diode</h3>
+    <p>A special diode that also conducts in <strong>reverse bias</strong> once its Zener voltage (V_Z) is reached. Across it, the voltage stays constant. Used as a <strong>voltage regulator</strong>.</p>
+
+    <div class="box box-info">
+      <strong>Key fact:</strong> in forward bias, a silicon diode starts conducting at the <em>threshold voltage</em> V_γ ≈ 0.7 V. In reverse bias, exceeding the breakdown voltage destroys a normal diode — but a Zener is designed to work in that region.
+    </div>
+
+    <div class="quiz" data-quiz data-module="diodes">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="b">
+        <p>1. What does "rectifying AC" mean?</p>
+        <label><input type="radio" name="d1" value="a"> Increasing its frequency</label>
+        <label><input type="radio" name="d1" value="b"> Turning it into DC</label>
+        <label><input type="radio" name="d1" value="c"> Changing its color</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>2. How many diodes are in a bridge rectifier?</p>
+        <label><input type="radio" name="d2" value="a"> 4</label>
+        <label><input type="radio" name="d2" value="b"> 2</label>
+        <label><input type="radio" name="d2" value="c"> 1</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>3. When does a Zener diode conduct in reverse bias?</p>
+        <label><input type="radio" name="d3" value="a"> Never</label>
+        <label><input type="radio" name="d3" value="b"> Always</label>
+        <label><input type="radio" name="d3" value="c"> When reverse voltage reaches or exceeds the Zener voltage</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
+    </div>
+
+    <div class="sim">
+      <h4>Simulation: half-wave and bridge rectifiers</h4>
+      <p><strong>Task A — Half-wave:</strong> in Falstad, build an AC source + one diode + a resistor. Watch the input and output on the oscilloscope. Which half of the wave is removed?</p>
+      <p><strong>Task B — Bridge:</strong> replace the diode with a bridge rectifier (4 diodes). Watch the output. How does it differ?</p>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="capacitors">← Capacitors</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="transistors">Next job: Transistors →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     05 TRANSISTORS
+===================================================== -->
+<div class="page" id="transistors">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 05</span>The Mute Radio</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "An old AM radio has no sound. The transistor that amplifies the signal is weak. Replace it — but first, understand it. — Vega"
+      <br><br>
+      <em>A transistor is a semiconductor with three terminals: emitter (E), base (B), collector (C). It has two main uses: switch and amplifier.</em>
+    </div>
+
+    <h3>Regions of operation</h3>
+    <table>
+      <thead><tr><th>Region</th><th>Behavior</th><th>Conditions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cut-off</strong></td><td>Open switch</td><td>V_BE &lt; 0.7 V · I_B = I_C = 0</td></tr>
+        <tr><td><strong>Active</strong></td><td>Amplifies</td><td>V_BE ≥ 0.7 V · I_C = I_B × β</td></tr>
+        <tr><td><strong>Saturation</strong></td><td>Closed switch</td><td>V_BE ≥ 0.7 V · V_CE ≈ 0.2 V · I_C ≤ I_B × β</td></tr>
+      </tbody>
+    </table>
+
+    <p>The gain β (beta) is specific to each transistor, typically between 50 and 300.</p>
+
+    <h3>Darlington pair</h3>
+    <p>Two transistors in cascade to amplify very weak signals. The total gain is the product:</p>
+    <div class="formula">β = β₁ × β₂</div>
+
+    <div class="quiz" data-quiz data-module="transistors">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="a">
+        <p>1. Which quantity controls the operation of a transistor?</p>
+        <label><input type="radio" name="t1" value="a"> Base current I_B</label>
+        <label><input type="radio" name="t1" value="b"> Collector voltage V_C</label>
+        <label><input type="radio" name="t1" value="c"> Emitter resistance</label>
+      </div>
+
+      <div class="question" data-answer="b">
+        <p>2. In the active region, the collector current is:</p>
+        <label><input type="radio" name="t2" value="a"> I_C = I_B / β</label>
+        <label><input type="radio" name="t2" value="b"> I_C = I_B × β</label>
+        <label><input type="radio" name="t2" value="c"> I_C = I_B + β</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>3. If β₁ = 100 and β₂ = 50, what is the gain of a Darlington pair?</p>
+        <label><input type="radio" name="t3" value="a"> 150</label>
+        <label><input type="radio" name="t3" value="b"> 50</label>
+        <label><input type="radio" name="t3" value="c"> 5 000</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>4. In saturation, a transistor behaves like:</p>
+        <label><input type="radio" name="t4" value="a"> A closed switch</label>
+        <label><input type="radio" name="t4" value="b"> An amplifier</label>
+        <label><input type="radio" name="t4" value="c"> An open switch</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
+    </div>
+
+    <div class="sim">
+      <h4>Simulation: transistor as a switch</h4>
+      <ol>
+        <li>In Tinkercad, build: 9 V battery, potentiometer at the base, 1 kΩ resistor, NPN transistor (BC548), 470 Ω resistor and an LED at the collector.</li>
+        <li>Sweep the potentiometer from 400 kΩ down to 1 kΩ.</li>
+        <li>Note when the LED turns on. In your notebook, say in which region the transistor is working at each stage (cut-off, active, saturation).</li>
+        <li>Measure V_BE and V_CE with the simulator's multimeter.</li>
+      </ol>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="diodes">← Diodes</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="supplies">Next job: Power Supplies →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     06 POWER SUPPLIES
+===================================================== -->
+<div class="page" id="supplies">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 06</span>The Noisy Bench Supply</h2>
+
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "The shop's bench power supply hums and gives unstable voltage. Time to understand every stage — transformer, rectifier, filter, regulator. — Vega"
+      <br><br>
+      <em>Electronic devices run on DC (12 V or less). The wall socket gives 230 V AC. The power supply turns one into the other.</em>
+    </div>
+
+    <h3>Stages of a power supply</h3>
     <ol>
-      <li>Abre <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad Circuit Simulator ↗</a>.</li>
-      <li>Arrastra una <strong>batería</strong> (Add → Inputs and Sources → DC Voltage Source).</li>
-      <li>Añade una <strong>resistencia</strong> (Add → Passive Components → Resistor) conectada en serie.</li>
-      <li>Cierra el circuito con cables (Add → Wires → Wire).</li>
-      <li>Añade un <strong>amperímetro</strong> en serie y un <strong>voltímetro</strong> en paralelo con la resistencia.</li>
-      <li>Fija la batería a 10 V y la resistencia a 100 Ω. Anota la intensidad. Repite con 200 Ω, 500 Ω y 1 kΩ. ¿Se cumple I = V/R?</li>
+      <li><strong>Transformer:</strong> steps down 230 V AC to the required AC voltage.</li>
+      <li><strong>Bridge rectifier:</strong> converts AC into pulsating DC.</li>
+      <li><strong>Capacitor:</strong> filters the ripple, smoothing the wave.</li>
+      <li><strong>Regulator (Zener + resistor):</strong> removes residual ripple and delivers constant voltage.</li>
     </ol>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-  </div>
-</section>
 
-<!-- ============================ 2. RESISTENCIAS ============================ -->
-<section id="resistencias">
-  <h2><span class="num">2</span>Resistencias</h2>
-
-  <p>Las resistencias <strong>obstaculizan el paso de la corriente</strong>. Sus dos aplicaciones fundamentales en electrónica son:</p>
-
-  <h3>2.1 Divisor de tensión</h3>
-  <p>Circuito formado por dos o más resistencias en serie con una fuente. La tensión en cada resistencia es una fracción de la tensión de alimentación.</p>
-  <div class="formula">V_AB = V · R₁ / (R₁ + R₂)</div>
-  <p>Sirve para alimentar cualquier componente con la tensión que necesita.</p>
-
-  <h3>2.2 Limitador de corriente</h3>
-  <p>Resistencia en serie con otro componente (por ejemplo, un LED) para reducir la corriente que circula por él.</p>
-  <div class="formula">R = (V − V_LED) / I</div>
-
-  <div class="box box-warn">
-    <strong>¡Atención!</strong> Un LED siempre debe conectarse en serie con una resistencia limitadora. Si no, se estropea.
-  </div>
-
-  <div class="box box-tip">
-    <strong>Para saber más:</strong> las resistencias comerciales siguen series normalizadas (E6, E12, E24…). La serie E6 tiene: 1,0 · 1,5 · 2,2 · 3,3 · 4,7 · 6,8. Cada valor puede ir en Ω, kΩ o MΩ.
-  </div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. En un divisor de tensión con R₁ = 1 kΩ y R₂ = 2 kΩ alimentado a 9 V, ¿cuánto vale V en R₂?</p>
-      <label><input type="radio" name="q5" value="a"> 3 V</label>
-      <label><input type="radio" name="q5" value="b"> 6 V</label>
-      <label><input type="radio" name="q5" value="c"> 4,5 V</label>
+    <div class="box box-info">
+      <strong>Chain:</strong> 230 V AC → Transformer → Reduced AC → Bridge → Pulsating DC → Capacitor → DC with ripple → Zener → Constant DC.
     </div>
 
-    <div class="question" data-answer="c">
-      <p>2. ¿Para qué sirve una resistencia limitadora en serie con un LED?</p>
-      <label><input type="radio" name="q6" value="a"> Para aumentar el brillo del LED</label>
-      <label><input type="radio" name="q6" value="b"> Para cambiar el color del LED</label>
-      <label><input type="radio" name="q6" value="c"> Para que la corriente que circula por el LED no lo dañe</label>
+    <div class="quiz" data-quiz data-module="supplies">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="b">
+        <p>1. Which part of the power supply reduces the 230 V?</p>
+        <label><input type="radio" name="p1" value="a"> The bridge rectifier</label>
+        <label><input type="radio" name="p1" value="b"> The transformer</label>
+        <label><input type="radio" name="p1" value="c"> The capacitor</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>2. What does the capacitor do in a power supply?</p>
+        <label><input type="radio" name="p2" value="a"> Filter the ripple</label>
+        <label><input type="radio" name="p2" value="b"> Rectify the current</label>
+        <label><input type="radio" name="p2" value="c"> Transform the voltage</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>3. The Zener diode in a power supply acts as a:</p>
+        <label><input type="radio" name="p3" value="a"> Rectifier</label>
+        <label><input type="radio" name="p3" value="b"> Transformer</label>
+        <label><input type="radio" name="p3" value="c"> Voltage regulator</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>3. En el circuito de la figura, si V = 9 V y R₂ = 220 Ω, y R₁ = 470 Ω, ¿cuál es la tensión en R₂?</p>
-      <label><input type="radio" name="q7" value="a"> ≈ 2,86 V</label>
-      <label><input type="radio" name="q7" value="b"> ≈ 6,14 V</label>
-      <label><input type="radio" name="q7" value="c"> 9 V</label>
+    <div class="sim">
+      <h4>Simulation: full power supply</h4>
+      <ol>
+        <li>In Falstad, build an AC source (50 Hz, 325 V amplitude) + 32:1 transformer + bridge rectifier + 100 μF capacitor + load resistor.</li>
+        <li>Place the oscilloscope at the transformer output and at the bridge output. Compare.</li>
+        <li>Add the capacitor and watch the ripple shrink.</li>
+        <li>Sketch the three waves (AC, pulsating, filtered) and explain what each stage does.</li>
+      </ol>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
+    <div class="page-nav">
+      <a class="btn" data-page="transistors">← Transistors</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="timer">Next job: 555 Timer →</a>
+    </div>
+  </section>
+</div>
 
-  <div class="simulacion">
-    <h4>Simula: divisor de tensión y limitador de LED</h4>
-    <p><strong>Actividad A — Divisor de tensión:</strong> monta en Falstad una batería de 9 V con dos resistencias en serie (470 Ω y 220 Ω). Mide la tensión en cada una y compara con los cálculos teóricos.</p>
-    <p><strong>Actividad B — Limitador de LED:</strong> monta en Tinkercad una pila de 5 V, una resistencia y un LED en serie. Calcula R para que la corriente sea de 20 mA (V_LED = 2 V). Comprueba en el simulador.</p>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-    <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Abrir Tinkercad</a>
-  </div>
-</section>
+<!-- =====================================================
+     07 TIMER 555
+===================================================== -->
+<div class="page" id="timer">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 07</span>The Blinking Turn Signal</h2>
 
-<!-- ============================ 3. CONDENSADORES ============================ -->
-<section id="condensadores">
-  <h2><span class="num">3</span>Condensadores</h2>
-
-  <p>Un condensador <strong>almacena energía eléctrica</strong> cuando se carga y la cede al circuito cuando se descarga. Sus aplicaciones principales en corriente continua son:</p>
-  <ul>
-    <li><strong>Circuitos temporizadores</strong>: la carga y descarga no es instantánea si hay una resistencia en serie.</li>
-    <li><strong>Filtrado</strong> en fuentes de alimentación.</li>
-  </ul>
-
-  <h3>3.1 Temporizadores</h3>
-  <p>Al conectar una resistencia en serie con el condensador, se retrasa la carga y descarga. El tiempo característico es:</p>
-  <div class="formula">t_c = t_d = 5 · R · C</div>
-  <p>donde R en Ω y C en faradios. El factor 5 indica que se considera totalmente cargado/descargado tras 5 constantes de tiempo.</p>
-
-  <h3>3.2 Unidades de capacidad</h3>
-  <ul>
-    <li>Microfaradio (μF): 1 μF = 10⁻⁶ F</li>
-    <li>Nanofaradio (nF): 1 nF = 10⁻⁹ F</li>
-    <li>Picofaradio (pF): 1 pF = 10⁻¹² F</li>
-  </ul>
-
-  <div class="box box-warn">
-    <strong>Seguridad:</strong> los condensadores grandes pueden quedar cargados y descargarse a través de tu cuerpo. Descárgalos siempre con una resistencia, nunca con un cortocircuito.
-  </div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. ¿Qué función principal tiene un condensador en corriente continua?</p>
-      <label><input type="radio" name="q8" value="a"> Amplificar la corriente</label>
-      <label><input type="radio" name="q8" value="b"> Almacenar energía eléctrica</label>
-      <label><input type="radio" name="q8" value="c"> Rectificar la corriente alterna</label>
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "A customer wants their vintage car's turn signal to blink properly again. The 555 timer is the classic chip for this. Master it — and you'll control time itself. — Vega"
+      <br><br>
+      <em>The 555 IC controls how long a device is powered. It has two main modes: monostable (timer) and astable (oscillator).</em>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>2. ¿Cuánto tarda en cargarse un condensador de 100 μF a través de una resistencia de 10 kΩ?</p>
-      <label><input type="radio" name="q9" value="a"> 5 segundos</label>
-      <label><input type="radio" name="q9" value="b"> 0,5 segundos</label>
-      <label><input type="radio" name="q9" value="c"> 50 segundos</label>
+    <h3>Key pins</h3>
+    <ul>
+      <li><strong>Pin 2 (trigger):</strong> if V &lt; V_CC/3, output goes HIGH (V_CC).</li>
+      <li><strong>Pin 3 (output):</strong> supplies V_CC or 0 V.</li>
+      <li><strong>Pin 6 (threshold):</strong> if V &gt; 2·V_CC/3, output goes LOW (0 V).</li>
+    </ul>
+
+    <h3>Monostable mode (timer)</h3>
+    <p>Output stays LOW until the trigger is pulsed. Then it goes HIGH for a time T and returns LOW.</p>
+    <div class="formula">T = 1.1 · R · C</div>
+
+    <h3>Astable mode (oscillator)</h3>
+    <p>Output swings periodically between HIGH and LOW. No stable state. Used in blinkers, alarms, buzzers…</p>
+    <div class="formula">T₁ = 0.693 · (R₁ + R₂) · C &nbsp;&nbsp;|&nbsp;&nbsp; T₂ = 0.693 · R₂ · C</div>
+
+    <div class="quiz" data-quiz data-module="timer">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="b">
+        <p>1. How many pins does the 555 IC have?</p>
+        <label><input type="radio" name="ti1" value="a"> 4</label>
+        <label><input type="radio" name="ti1" value="b"> 8</label>
+        <label><input type="radio" name="ti1" value="c"> 16</label>
+      </div>
+
+      <div class="question" data-answer="a">
+        <p>2. In monostable mode, the output stays HIGH for a time:</p>
+        <label><input type="radio" name="ti2" value="a"> T = 1.1 · R · C</label>
+        <label><input type="radio" name="ti2" value="b"> T = 0.693 · R · C</label>
+        <label><input type="radio" name="ti2" value="c"> T = 5 · R · C</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>3. In astable mode, the 555:</p>
+        <label><input type="radio" name="ti3" value="a"> Has only one stable state</label>
+        <label><input type="radio" name="ti3" value="b"> Stays permanently at 0 V</label>
+        <label><input type="radio" name="ti3" value="c"> Oscillates between V_CC and 0 V periodically</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
     </div>
 
-    <div class="question" data-answer="c">
-      <p>3. 1 μF equivale a:</p>
-      <label><input type="radio" name="q10" value="a"> 10⁻³ F</label>
-      <label><input type="radio" name="q10" value="b"> 10⁻⁹ F</label>
-      <label><input type="radio" name="q10" value="c"> 10⁻⁶ F</label>
+    <div class="sim">
+      <h4>Simulation: timer and blinker with the 555</h4>
+      <p><strong>Task A — Monostable:</strong> in Tinkercad, build a 555 with R = 100 kΩ and C = 100 μF. Calculate T = 1.1·R·C. Press the button and time how long the LED stays on. Does it match?</p>
+      <p><strong>Task B — Astable:</strong> wire the 555 as an astable with R₁ = 47 kΩ, R₂ = 22 kΩ and C = 22 μF. Calculate T₁ and T₂. Check the LED blinks with those timings.</p>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
+    <div class="page-nav">
+      <a class="btn" data-page="supplies">← Power Supplies</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="opamp">Next job: Op-Amp 741 →</a>
+    </div>
+  </section>
+</div>
 
-  <div class="simulacion">
-    <h4>Simula: carga y descarga de un condensador</h4>
-    <ol>
-      <li>Abre <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad ↗</a> y monta el circuito: batería de 9 V + interruptor + resistencia de 10 kΩ + condensador de 100 μF.</li>
-      <li>Coloca la sonda del osciloscopio en los extremos del condensador.</li>
-      <li>Cierra el interruptor y observa la curva de carga. ¿Cuánto tarda en alcanzar el 99% de la tensión?</li>
-      <li>Cambia R a 20 kΩ y a 5 kΩ. ¿Cómo cambia el tiempo de carga?</li>
-      <li>Comprueba que se cumple t = 5·R·C.</li>
-    </ol>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-  </div>
-</section>
+<!-- =====================================================
+     08 OP-AMP 741
+===================================================== -->
+<div class="page" id="opamp">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Job 08</span>The Dusk Sensor</h2>
 
-<!-- ============================ 4. DIODOS ============================ -->
-<section id="diodos">
-  <h2><span class="num">4</span>Diodos</h2>
-
-  <p>Un diodo es un semiconductor que <strong>permite el paso de corriente en sentido ánodo → cátodo</strong> (polarización directa) y lo impide en sentido contrario (polarización inversa).</p>
-
-  <h3>4.1 Rectificación</h3>
-  <p>La aplicación principal del diodo es <strong>rectificar la corriente alterna</strong>: convertirla en continua eliminando o transformando la parte negativa de la onda. Se usa en fuentes de alimentación.</p>
-  <ul>
-    <li><strong>Rectificador de media onda:</strong> un solo diodo. Solo deja pasar los semiciclos positivos.</li>
-    <li><strong>Rectificador en puente:</strong> cuatro diodos. Aprovecha los dos semiciclos (corriente continua pulsante).</li>
-  </ul>
-
-  <h3>4.2 Diodo Zener</h3>
-  <p>Es un diodo especial que, además de conducir en polarización directa, conduce también en <strong>polarización inversa</strong> cuando se alcanza su tensión Zener (V_Z). En ese momento, la tensión entre sus extremos se mantiene constante. Se usa como <strong>estabilizador de tensión</strong>.</p>
-
-  <div class="box box-info">
-    <strong>Dato:</strong> en polarización directa, un diodo empieza a conducir a partir de la <em>tensión umbral</em> V_γ ≈ 0,7 V (para silicio). En inversa, si se supera la tensión de ruptura, el diodo se estropea (salvo el Zener, que trabaja en esa zona).
-  </div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. ¿Qué significa rectificar una corriente alterna?</p>
-      <label><input type="radio" name="q11" value="a"> Aumentar su frecuencia</label>
-      <label><input type="radio" name="q11" value="b"> Convertirla en continua</label>
-      <label><input type="radio" name="q11" value="c"> Cambiarle el color</label>
+    <div class="box box-info">
+      <strong>📋 Job ticket:</strong> "A customer's security light won't turn on at dusk. The op-amp is the brain that compares voltages and decides. Fix it. — Vega"
+      <br><br>
+      <em>The 741 op-amp is an IC that amplifies very weak signals. It compares the voltages at its two inputs.</em>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>2. ¿Cuántos diodos tiene un rectificador en puente?</p>
-      <label><input type="radio" name="q12" value="a"> 4</label>
-      <label><input type="radio" name="q12" value="b"> 2</label>
-      <label><input type="radio" name="q12" value="c"> 1</label>
+    <h3>Key pins</h3>
+    <ul>
+      <li><strong>Pin 2:</strong> inverting input (V−)</li>
+      <li><strong>Pin 3:</strong> non-inverting input (V+)</li>
+      <li><strong>Pin 6:</strong> output (V_s)</li>
+      <li><strong>Pin 4:</strong> negative supply (−V_CC)</li>
+      <li><strong>Pin 7:</strong> positive supply (+V_CC)</li>
+    </ul>
+
+    <p>Output voltage:</p>
+    <div class="formula">V_s = A_v · (V+ − V−)</div>
+    <p>where A_v is the gain (around 100 000). The output is limited by the supply rails: V_s max = ±V_CC.</p>
+
+    <h3>Comparator application</h3>
+    <ul>
+      <li>If V+ &gt; V−, then V_s = +V_CC.</li>
+      <li>If V+ &lt; V−, then V_s = −V_CC.</li>
+    </ul>
+    <p>Used, for example, to control room lighting based on ambient light (with an LDR) or temperature (with a thermistor).</p>
+
+    <div class="quiz" data-quiz data-module="opamp">
+      <h4>Check your understanding</h4>
+
+      <div class="question" data-answer="a">
+        <p>1. If V+ = 1 V and V− = 0.5 V with A_v = 100, what is the output voltage (before limiting)?</p>
+        <label><input type="radio" name="o1" value="a"> 50 V</label>
+        <label><input type="radio" name="o1" value="b"> 0.5 V</label>
+        <label><input type="radio" name="o1" value="c"> 150 V</label>
+      </div>
+
+      <div class="question" data-answer="c">
+        <p>2. A 741 op-amp supplied with ±9 V has V+ &gt; V−. The output is:</p>
+        <label><input type="radio" name="o2" value="a"> 0 V</label>
+        <label><input type="radio" name="o2" value="b"> −9 V</label>
+        <label><input type="radio" name="o2" value="c"> +9 V</label>
+      </div>
+
+      <div class="question" data-answer="b">
+        <p>3. Which pin is the inverting input?</p>
+        <label><input type="radio" name="o3" value="a"> Pin 3</label>
+        <label><input type="radio" name="o3" value="b"> Pin 2</label>
+        <label><input type="radio" name="o3" value="c"> Pin 6</label>
+      </div>
+
+      <button class="btn-check" onclick="checkQuiz(this)">Check answers</button>
+      <div class="resultado"></div>
     </div>
 
-    <div class="question" data-answer="c">
-      <p>3. ¿En qué condiciones conduce un diodo Zener en polarización inversa?</p>
-      <label><input type="radio" name="q13" value="a"> Nunca conduce en inversa</label>
-      <label><input type="radio" name="q13" value="b"> Siempre conduce en inversa</label>
-      <label><input type="radio" name="q13" value="c"> Cuando la tensión inversa alcanza o supera la tensión Zener</label>
+    <div class="sim">
+      <h4>Simulation: comparator with an LDR</h4>
+      <ol>
+        <li>In Falstad, build a 741 op-amp with ±9 V supply.</li>
+        <li>Connect a voltage divider with an LDR to the non-inverting input and another divider with a fixed resistor to the inverting input.</li>
+        <li>Place an LED (with its current-limiting resistor) at the op-amp output.</li>
+        <li>Change the LDR value (simulating light/dark) and watch when the LED turns on.</li>
+        <li>Explain the operation in your notebook.</li>
+      </ol>
+      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
+    <div class="page-nav">
+      <a class="btn" data-page="timer">← 555 Timer</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="project">Final Project →</a>
+    </div>
+  </section>
+</div>
 
-  <div class="simulacion">
-    <h4>Simula: rectificador de media onda y puente de diodos</h4>
-    <p><strong>Actividad A — Media onda:</strong> en Falstad, monta un generador de alterna (Add → Inputs and Sources → AC Voltage Source) + un diodo + una resistencia. Coloca el osciloscopio para ver la onda de entrada y la de salida. ¿Qué parte de la onda se elimina?</p>
-    <p><strong>Actividad B — Puente de diodos:</strong> sustituye el diodo por un puente rectificador (4 diodos). Observa la onda de salida. ¿En qué se diferencia de la anterior?</p>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-    <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Abrir Tinkercad</a>
-  </div>
-</section>
+<!-- =====================================================
+     PROJECT
+===================================================== -->
+<div class="page" id="project">
+  <section class="card">
+    <h2 class="page-title"><span class="job">Final Exam</span>Design your own circuit</h2>
 
-<!-- ============================ 5. TRANSISTORES ============================ -->
-<section id="transistores">
-  <h2><span class="num">5</span>Transistores</h2>
+    <p>You've made it to the final shift. Now <strong>apply everything you've learned</strong>. Pick <strong>one</strong> of the missions below, design it in Falstad or Tinkercad, and present it to the rest of the shop.</p>
 
-  <p>Un transistor es un semiconductor con <strong>tres terminales</strong>: emisor (E), base (B) y colector (C). Tiene dos usos principales:</p>
-  <ul>
-    <li><strong>Interruptor</strong> controlado por la corriente de base.</li>
-    <li><strong>Amplificador</strong> de corriente.</li>
-  </ul>
-
-  <h3>5.1 Zonas de trabajo</h3>
-  <table>
-    <thead>
-      <tr><th>Zona</th><th>Comportamiento</th><th>Condiciones</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Corte</strong></td><td>Interruptor abierto</td><td>V_BE &lt; 0,7 V · I_B = I_C = 0</td></tr>
-      <tr><td><strong>Activa</strong></td><td>Amplifica</td><td>V_BE ≥ 0,7 V · I_C = I_B × β</td></tr>
-      <tr><td><strong>Saturación</strong></td><td>Interruptor cerrado</td><td>V_BE ≥ 0,7 V · V_CE ≈ 0,2 V · I_C ≤ I_B × β</td></tr>
-    </tbody>
-  </table>
-
-  <p>La ganancia β (beta) es característica de cada transistor. Suele valer entre 50 y 300.</p>
-
-  <h3>5.2 El par Darlington</h3>
-  <p>Dos transistores en cascada para amplificar señales muy pequeñas. La ganancia total es el producto de las ganancias:</p>
-  <div class="formula">β = β₁ × β₂</div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="a">
-      <p>1. ¿Qué magnitud controla el funcionamiento de un transistor?</p>
-      <label><input type="radio" name="q14" value="a"> La corriente de base I_B</label>
-      <label><input type="radio" name="q14" value="b"> La tensión de colector V_C</label>
-      <label><input type="radio" name="q14" value="c"> La resistencia del emisor</label>
+    <div class="reto">
+      <h4>Mission 1: Automatic night light <span class="nivel nivel-basico">Basic</span></h4>
+      <p>Design a circuit that turns on an LED when it gets dark. Use an LDR, a transistor and a current-limiting resistor. Power it with a 9 V battery.</p>
+      <p><strong>Deliverables:</strong> schematic, component list, operation explanation, simulation screenshot.</p>
     </div>
 
-    <div class="question" data-answer="b">
-      <p>2. En zona activa, la corriente de colector vale:</p>
-      <label><input type="radio" name="q15" value="a"> I_C = I_B / β</label>
-      <label><input type="radio" name="q15" value="b"> I_C = I_B × β</label>
-      <label><input type="radio" name="q15" value="c"> I_C = I_B + β</label>
+    <div class="reto">
+      <h4>Mission 2: Hallway timer light <span class="nivel nivel-basico">Basic</span></h4>
+      <p>Design a circuit that turns on a lamp for 10 seconds after pressing a button, then turns off automatically. Use a capacitor and a resistor (or the 555 IC).</p>
+      <p><strong>Deliverables:</strong> schematic, R and C calculations, explanation, simulation screenshot.</p>
     </div>
 
-    <div class="question" data-answer="c">
-      <p>3. Si β₁ = 100 y β₂ = 50, ¿cuál es la ganancia de un par Darlington?</p>
-      <label><input type="radio" name="q16" value="a"> 150</label>
-      <label><input type="radio" name="q16" value="b"> 50</label>
-      <label><input type="radio" name="q16" value="c"> 5 000</label>
+    <div class="reto">
+      <h4>Mission 3: 555 blinker <span class="nivel nivel-medio">Intermediate</span></h4>
+      <p>Design a blinker that makes an LED flash every 0.5 s (on for 0.3 s, off for 0.2 s). Use the 555 in astable mode.</p>
+      <p><strong>Deliverables:</strong> schematic, calculations for R₁, R₂ and C, explanation, simulation screenshot.</p>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>4. Cuando el transistor trabaja en saturación se comporta como:</p>
-      <label><input type="radio" name="q17" value="a"> Un interruptor cerrado</label>
-      <label><input type="radio" name="q17" value="b"> Un amplificador</label>
-      <label><input type="radio" name="q17" value="c"> Un interruptor abierto</label>
+    <div class="reto">
+      <h4>Mission 4: Temperature alarm <span class="nivel nivel-medio">Intermediate</span></h4>
+      <p>Design a circuit that triggers a buzzer when the temperature rises above a set value. Use a thermistor, a 741 op-amp as a comparator and a transistor to drive the buzzer.</p>
+      <p><strong>Deliverables:</strong> schematic, explanation, simulation screenshot.</p>
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
-
-  <div class="simulacion">
-    <h4>Simula: transistor como interruptor</h4>
-    <ol>
-      <li>En Tinkercad, monta un circuito con: pila de 9 V, potenciómetro en la base, resistencia de 1 kΩ, transistor NPN (BC548), resistencia de 470 Ω y LED en el colector.</li>
-      <li>Varía el potenciómetro desde 400 kΩ hasta 1 kΩ.</li>
-      <li>Observa en qué momento se enciende el LED y explica en tu cuaderno en qué zona trabaja el transistor en cada caso (corte, activa, saturación).</li>
-      <li>Mide V_BE y V_CE con el multímetro del simulador.</li>
-    </ol>
-    <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Abrir Tinkercad</a>
-  </div>
-</section>
-
-<!-- ============================ 6. FUENTES ============================ -->
-<section id="fuentes">
-  <h2><span class="num">6</span>Fuentes de alimentación</h2>
-
-  <p>Los aparatos electrónicos funcionan con corriente continua (12 V o menos). La instalación eléctrica proporciona 230 V en alterna. La <strong>fuente de alimentación</strong> transforma una en otra.</p>
-
-  <h3>6.1 Etapas de una fuente de alimentación</h3>
-  <ol>
-    <li><strong>Transformador:</strong> reduce la tensión alterna de 230 V al valor adecuado.</li>
-    <li><strong>Rectificador en puente de diodos:</strong> convierte la alterna en continua pulsante.</li>
-    <li><strong>Condensador:</strong> filtra el rizado, suavizando la onda (continua con pequeñas variaciones).</li>
-    <li><strong>Estabilizador (diodo Zener + resistencia):</strong> elimina el rizado residual y proporciona una tensión constante.</li>
-  </ol>
-
-  <div class="box box-info">
-    <strong>Resumen visual:</strong> Alterna 230 V → Transformador → Alterna reducida → Puente de diodos → Continua pulsante → Condensador → Continua con rizado → Zener → Continua constante.
-  </div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. ¿Qué elemento de la fuente de alimentación reduce la tensión de 230 V?</p>
-      <label><input type="radio" name="q18" value="a"> El puente de diodos</label>
-      <label><input type="radio" name="q18" value="b"> El transformador</label>
-      <label><input type="radio" name="q18" value="c"> El condensador</label>
+    <div class="reto">
+      <h4>Mission 5: Basic power supply <span class="nivel nivel-avanzado">Advanced</span></h4>
+      <p>Design a power supply that converts 230 V AC into 5 V DC. Include a transformer, bridge rectifier, filter capacitor and Zener regulator.</p>
+      <p><strong>Deliverables:</strong> full schematic, transformer / capacitor / Zener calculations, waves at every stage, explanation.</p>
     </div>
 
-    <div class="question" data-answer="a">
-      <p>2. ¿Qué hace el condensador en una fuente de alimentación?</p>
-      <label><input type="radio" name="q19" value="a"> Filtrar el rizado</label>
-      <label><input type="radio" name="q19" value="b"> Rectificar la corriente</label>
-      <label><input type="radio" name="q19" value="c"> Transformar la tensión</label>
+    <div class="reto">
+      <h4>Mission 6: Voltage divider for a 1.5 V clock <span class="nivel nivel-basico">Basic</span></h4>
+      <p>A clock runs on a 1.5 V battery, but you only have a 4.5 V battery. Design a voltage divider with two resistors to feed it correctly. Calculate the values and check in the simulator.</p>
+      <p><strong>Deliverables:</strong> schematic, calculations, simulation screenshot, explanation.</p>
     </div>
 
-    <div class="question" data-answer="c">
-      <p>3. El diodo Zener en una fuente de alimentación actúa como:</p>
-      <label><input type="radio" name="q20" value="a"> Rectificador</label>
-      <label><input type="radio" name="q20" value="b"> Transformador</label>
-      <label><input type="radio" name="q20" value="c"> Estabilizador de tensión</label>
+    <div class="box box-tip">
+      <strong>Presentation tips:</strong> prepare 5 slides — 1) problem, 2) circuit schematic, 3) calculations, 4) simulation running, 5) conclusions and challenges.
     </div>
 
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
+    <h3>Achievements</h3>
+    <table>
+      <thead><tr><th>Criterion</th><th>Weight</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Module checks</td><td>25%</td><td>Score on the check questions in each job.</td></tr>
+        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the simulator activities and recording results.</td></tr>
+        <tr><td>Final Project</td><td>30%</td><td>Design, calculations, simulation and explanation.</td></tr>
+        <tr><td>Oral presentation</td><td>10%</td><td>Clarity, order and command of the topic.</td></tr>
+        <tr><td>Teamwork &amp; autonomy</td><td>10%</td><td>Collaboration, task sharing, independent problem solving.</td></tr>
+      </tbody>
+    </table>
 
-  <div class="simulacion">
-    <h4>Simula: fuente de alimentación completa</h4>
-    <ol>
-      <li>En Falstad, monta un generador de alterna (50 Hz, 325 V de amplitud) + transformador 32:1 + puente de diodos + condensador de 100 μF + resistencia de carga.</li>
-      <li>Coloca el osciloscopio a la salida del transformador y a la salida del puente. Compara las ondas.</li>
-      <li>Añade el condensador y observa cómo se reduce el rizado.</li>
-      <li>Dibuja en tu cuaderno las tres ondas (alterna, pulsante, filtrada) y explica qué hace cada etapa.</li>
-    </ol>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-  </div>
-</section>
-
-<!-- ============================ 7. CI 555 ============================ -->
-<section id="ci555">
-  <h2><span class="num">7</span>Circuito integrado 555</h2>
-
-  <p>El CI 555 se utiliza para <strong>controlar tiempos</strong>. Tiene 8 patillas; las más importantes son:</p>
-  <ul>
-    <li><strong>Pin 2 (disparo):</strong> si V &lt; V_CC/3, la salida se pone a V_CC.</li>
-    <li><strong>Pin 3 (salida):</strong> suministra V_CC o 0 V.</li>
-    <li><strong>Pin 6 (umbral):</strong> si V &gt; 2·V_CC/3, la salida se pone a 0 V.</li>
-  </ul>
-
-  <h3>7.1 Modo monoestable (temporizador)</h3>
-  <p>La salida permanece a 0 V hasta que se pulsa el disparo. Entonces la salida pasa a V_CC durante un tiempo T y vuelve a 0 V.</p>
-  <div class="formula">T = 1,1 · R · C</div>
-
-  <h3>7.2 Modo astable (oscilador)</h3>
-  <p>La salida cambia periódicamente entre V_CC y 0 V. No tiene estado estable. Se usa en intermitentes, alarmas, etc.</p>
-  <div class="formula">T₁ = 0,693 · (R₁ + R₂) · C &nbsp;&nbsp;|&nbsp;&nbsp; T₂ = 0,693 · R₂ · C</div>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="b">
-      <p>1. ¿Cuántas patillas tiene el CI 555?</p>
-      <label><input type="radio" name="q21" value="a"> 4</label>
-      <label><input type="radio" name="q21" value="b"> 8</label>
-      <label><input type="radio" name="q21" value="c"> 16</label>
+    <div class="page-nav">
+      <a class="btn" data-page="opamp">← Op-Amp 741</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="home">Back to Base →</a>
     </div>
-
-    <div class="question" data-answer="a">
-      <p>2. En modo monoestable, la salida permanece a V_CC durante un tiempo:</p>
-      <label><input type="radio" name="q22" value="a"> T = 1,1 · R · C</label>
-      <label><input type="radio" name="q22" value="b"> T = 0,693 · R · C</label>
-      <label><input type="radio" name="q22" value="c"> T = 5 · R · C</label>
-    </div>
-
-    <div class="question" data-answer="c">
-      <p>3. En modo astable, el CI 555:</p>
-      <label><input type="radio" name="q23" value="a"> Solo tiene un estado estable</label>
-      <label><input type="radio" name="q23" value="b"> Se queda siempre a 0 V</label>
-      <label><input type="radio" name="q23" value="c"> Oscila entre V_CC y 0 V periódicamente</label>
-    </div>
-
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
-
-  <div class="simulacion">
-    <h4>Simula: temporizador e intermitente con 555</h4>
-    <p><strong>Actividad A — Monoestable:</strong> monta en Tinkercad un CI 555 con R = 100 kΩ y C = 100 μF. Calcula T = 1,1·R·C. Pulsa el botón y cronometra cuánto tiempo está encendido el LED. ¿Coincide con el cálculo?</p>
-    <p><strong>Actividad B — Astable:</strong> monta el 555 como astable con R₁ = 47 kΩ, R₂ = 22 kΩ y C = 22 μF. Calcula T₁ y T₂. Comprueba en el simulador que el LED parpadea con esos tiempos.</p>
-    <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Abrir Tinkercad</a>
-  </div>
-</section>
-
-<!-- ============================ 8. AO 741 ============================ -->
-<section id="ao741">
-  <h2><span class="num">8</span>Amplificador operacional 741</h2>
-
-  <p>El AO 741 es un circuito integrado capaz de <strong>amplificar señales muy débiles</strong>. Tiene 8 patillas; las principales son:</p>
-  <ul>
-    <li><strong>Pin 2:</strong> entrada inversora (V−)</li>
-    <li><strong>Pin 3:</strong> entrada no inversora (V+)</li>
-    <li><strong>Pin 6:</strong> salida (V_s)</li>
-    <li><strong>Pin 4:</strong> alimentación negativa (−V_CC)</li>
-    <li><strong>Pin 7:</strong> alimentación positiva (+V_CC)</li>
-  </ul>
-
-  <p>La tensión de salida es:</p>
-  <div class="formula">V_s = A_v · (V+ − V−)</div>
-  <p>donde A_v es la ganancia (del orden de 100 000). La salida está limitada por la alimentación: V_s máx = ±V_CC.</p>
-
-  <h3>8.1 Aplicación como comparador</h3>
-  <ul>
-    <li>Si V+ &gt; V−, entonces V_s = +V_CC.</li>
-    <li>Si V+ &lt; V−, entonces V_s = −V_CC.</li>
-  </ul>
-  <p>Se usa, por ejemplo, para controlar la iluminación de un local según la luz ambiente (con una LDR) o la temperatura (con un termistor).</p>
-
-  <div class="quiz" data-quiz>
-    <h4>Comprueba lo aprendido</h4>
-
-    <div class="question" data-answer="a">
-      <p>1. Si V+ = 1 V y V− = 0,5 V con A_v = 100, ¿cuál es la tensión de salida (sin limitar)?</p>
-      <label><input type="radio" name="q24" value="a"> 50 V</label>
-      <label><input type="radio" name="q24" value="b"> 0,5 V</label>
-      <label><input type="radio" name="q24" value="c"> 150 V</label>
-    </div>
-
-    <div class="question" data-answer="c">
-      <p>2. En un AO 741 alimentado con ±9 V, si V+ &gt; V−, la salida vale:</p>
-      <label><input type="radio" name="q25" value="a"> 0 V</label>
-      <label><input type="radio" name="q25" value="b"> −9 V</label>
-      <label><input type="radio" name="q25" value="c"> +9 V</label>
-    </div>
-
-    <div class="question" data-answer="b">
-      <p>3. ¿Qué patilla es la entrada inversora?</p>
-      <label><input type="radio" name="q26" value="a"> Pin 3</label>
-      <label><input type="radio" name="q26" value="b"> Pin 2</label>
-      <label><input type="radio" name="q26" value="c"> Pin 6</label>
-    </div>
-
-    <button class="btn-check" onclick="checkQuiz(this)">Comprobar respuestas</button>
-    <div class="resultado"></div>
-  </div>
-
-  <div class="simulacion">
-    <h4>Simula: comparador con LDR</h4>
-    <ol>
-      <li>En Falstad, monta un AO 741 con alimentación ±9 V.</li>
-      <li>Conecta un divisor de tensión con una LDR en la entrada no inversora y otro divisor con una resistencia fija en la entrada inversora.</li>
-      <li>Coloca un LED (con su resistencia limitadora) a la salida del AO.</li>
-      <li>Cambia el valor de la LDR (simulando luz/oscuridad) y observa cuándo se enciende el LED.</li>
-      <li>Explica en tu cuaderno el funcionamiento del circuito.</li>
-    </ol>
-    <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Abrir Falstad</a>
-  </div>
-</section>
-
-<!-- ============================ PROYECTO ============================ -->
-<section id="proyecto">
-  <h2><span class="num">🎓</span>Proyecto final: diseña tu circuito</h2>
-
-  <p>Ahora te toca <strong>aplicar todo lo aprendido</strong>. Elige <strong>uno</strong> de los siguientes retos, diséñalo en Falstad o Tinkercad y prepara una presentación breve para la clase.</p>
-
-  <div class="reto">
-    <h4>Reto 1: Luz nocturna automática <span class="nivel nivel-basico">Básico</span></h4>
-    <p>Diseña un circuito que encienda un LED cuando oscurece. Usa una LDR, un transistor y una resistencia limitadora. Debe funcionar con una pila de 9 V.</p>
-    <p><strong>Entregables:</strong> esquema, lista de componentes, explicación del funcionamiento, captura de la simulación.</p>
-  </div>
-
-  <div class="reto">
-    <h4>Reto 2: Temporizador para luz de portal <span class="nivel nivel-basico">Básico</span></h4>
-    <p>Diseña un circuito que encienda una lámpara durante 10 segundos al pulsar un botón y luego se apague sola. Usa un condensador y una resistencia (o el CI 555).</p>
-    <p><strong>Entregables:</strong> esquema, cálculos de R y C, explicación, captura de la simulación.</p>
-  </div>
-
-  <div class="reto">
-    <h4>Reto 3: Intermitente con CI 555 <span class="nivel nivel-medio">Medio</span></h4>
-    <p>Diseña un intermitente que haga parpadear un LED cada 0,5 s (encendido 0,3 s, apagado 0,2 s). Usa el CI 555 en modo astable.</p>
-    <p><strong>Entregables:</strong> esquema, cálculo de R₁, R₂ y C, explicación, captura de la simulación.</p>
-  </div>
-
-  <div class="reto">
-    <h4>Reto 4: Alarma de temperatura <span class="nivel nivel-medio">Medio</span></h4>
-    <p>Diseña un circuito que active un zumbador cuando la temperatura supere un valor. Usa un termistor, un AO 741 como comparador y un transistor para excitar el zumbador.</p>
-    <p><strong>Entregables:</strong> esquema, explicación, captura de la simulación.</p>
-  </div>
-
-  <div class="reto">
-    <h4>Reto 5: Fuente de alimentación básica <span class="nivel nivel-avanzado">Avanzado</span></h4>
-    <p>Diseña una fuente que convierta 230 V de alterna en 5 V de continua. Incluye transformador, puente de diodos, condensador de filtro y estabilizador con Zener.</p>
-    <p><strong>Entregables:</strong> esquema completo, cálculo del transformador, del condensador y del Zener, ondas en cada etapa, explicación.</p>
-  </div>
-
-  <div class="reto">
-    <h4>Reto 6: Divisor de tensión para alimentar un reloj <span class="nivel nivel-basico">Básico</span></h4>
-    <p>Un reloj funciona con una pila de 1,5 V, pero solo tienes una pila de 4,5 V. Diseña un divisor de tensión con dos resistencias para alimentarlo correctamente. Calcula los valores y comprueba en el simulador.</p>
-    <p><strong>Entregables:</strong> esquema, cálculos, captura de la simulación, explicación de por qué funciona.</p>
-  </div>
-
-  <div class="box box-tip">
-    <strong>Consejo para la presentación:</strong> prepara 5 diapositivas: 1) problema a resolver, 2) esquema del circuito, 3) cálculos justificativos, 4) simulación funcionando, 5) conclusiones y dificultades encontradas.
-  </div>
-</section>
-
-<!-- ============================ RÚBRICA ============================ -->
-<section id="rubrica">
-  <h2><span class="num">📋</span>Rúbrica de evaluación</h2>
-  <table>
-    <thead>
-      <tr><th>Criterio</th><th>Peso</th><th>Descripción</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Cuestionarios de comprobación</td><td>25%</td><td>Aciertos en los quizzes de cada apartado.</td></tr>
-      <tr><td>Actividades de simulación</td><td>25%</td><td>Realización de las simulaciones propuestas y anotación de resultados.</td></tr>
-      <tr><td>Proyecto final</td><td>30%</td><td>Diseño, cálculos, simulación y explicación del circuito elegido.</td></tr>
-      <tr><td>Presentación oral</td><td>10%</td><td>Claridad, orden y dominio del tema en la exposición.</td></tr>
-      <tr><td>Trabajo en equipo y autonomía</td><td>10%</td><td>Colaboración, reparto de tareas y resolución autónoma de problemas.</td></tr>
-    </tbody>
-  </table>
-</section>
+  </section>
+</div>
 
 </main>
 
 <footer>
-  <p>Laboratorio Virtual de Electrónica Analógica · Tecnología 4º ESO</p>
-  <p>Basado en el material curricular de <em>Tecnología 4º ESO - Editorial Donostiarra</em></p>
-  <p>Simuladores: <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad</a> · <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad</a></p>
+  <p>CircuitWorks · Analog Electronics Lab</p>
+  <p>Simulators: <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad</a> · <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad</a></p>
 </footer>
 
 <script>
 /* =========================================================
-   QUIZ AUTOEVALUABLE
+   PAGE ROUTER
    ========================================================= */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(!target) return;
+  target.classList.add('active');
+
+  // nav highlight
+  document.querySelectorAll('nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === id);
+  });
+
+  // update hash
+  if(location.hash !== '#' + id) history.replaceState(null,'','#' + id);
+
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  // if returning to home, refresh card done states
+  if(id === 'home') refreshHomeCards();
+}
+
+// click on any element with data-page
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-page]');
+  if(el){
+    e.preventDefault();
+    showPage(el.dataset.page);
+  }
+});
+
+// handle direct hash on load
+window.addEventListener('load', () => {
+  const hash = location.hash.replace('#','');
+  if(hash && document.getElementById(hash)) showPage(hash);
+  refreshHomeCards();
+  updateRank();
+});
+
+/* =========================================================
+   QUIZ CHECK
+========================================================= */
 function checkQuiz(btn){
   const quiz = btn.closest('.quiz');
   const questions = quiz.querySelectorAll('.question');
-  let correctas = 0;
-  let total = questions.length;
+  const moduleName = quiz.dataset.module || 'misc';
+  let correct = 0;
 
   questions.forEach(q => {
-    const respuestaCorrecta = q.dataset.answer;
-    const seleccionada = q.querySelector('input[type="radio"]:checked');
-    // eliminar feedback previo
+    const correctAnswer = q.dataset.answer;
+    const selected = q.querySelector('input[type="radio"]:checked');
     let fb = q.querySelector('.feedback');
     if(fb) fb.remove();
-
     fb = document.createElement('div');
     fb.className = 'feedback';
 
-    if(!seleccionada){
-      fb.textContent = '⚠️ No has seleccionado ninguna opción.';
+    if(!selected){
+      fb.textContent = '⚠️ No option selected.';
       fb.classList.add('incorrect');
-    } else if(seleccionada.value === respuestaCorrecta){
-      fb.textContent = '✅ ¡Correcto!';
+    } else if(selected.value === correctAnswer){
+      fb.textContent = '✅ Correct!';
       fb.classList.add('correct');
-      correctas++;
+      correct++;
     } else {
-      fb.textContent = '❌ Incorrecto. Vuelve a revisar la teoría.';
+      fb.textContent = '❌ Incorrect. Review the theory above.';
       fb.classList.add('incorrect');
     }
     q.appendChild(fb);
   });
 
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
   const resultado = quiz.querySelector('.resultado');
-  const porcentaje = Math.round((correctas / total) * 100);
-  resultado.className = 'resultado ' + (porcentaje >= 60 ? 'ok' : 'ko');
-  resultado.textContent = `Resultado: ${correctas}/${total} aciertos (${porcentaje}%)`;
+  resultado.className = 'resultado ' + (pct >= 60 ? 'ok' : 'ko');
+  resultado.textContent = `Score: ${correct}/${total} (${pct}%)`;
+
+  // mark module as done if passing
+  if(pct >= 60 && moduleName !== 'misc'){
+    markDone(moduleName);
+  }
 }
 
 /* =========================================================
-   BARRA DE PROGRESO DE LECTURA
-   ========================================================= */
+   PROGRESS TRACKING (localStorage)
+========================================================= */
+const MODULES = ['fundamentals','resistors','capacitors','diodes','transistors','supplies','timer','opamp'];
+
+function getDone(){
+  try{ return JSON.parse(localStorage.getItem('cw_done') || '[]'); }
+  catch(e){ return []; }
+}
+function markDone(id){
+  const done = getDone();
+  if(!done.includes(id)){
+    done.push(id);
+    localStorage.setItem('cw_done', JSON.stringify(done));
+    refreshHomeCards();
+    updateRank();
+    updateNavChecks();
+  }
+}
+
+function refreshHomeCards(){
+  const done = getDone();
+  document.querySelectorAll('#homeGrid .job-card').forEach(card => {
+    card.classList.toggle('done', done.includes(card.dataset.page));
+  });
+}
+
+function updateNavChecks(){
+  const done = getDone();
+  document.querySelectorAll('nav a').forEach(a => {
+    a.classList.toggle('done', done.includes(a.dataset.page));
+  });
+}
+
+function updateRank(){
+  const done = getDone().length;
+  const rankEl = document.getElementById('rankLabel');
+  if(!rankEl) return;
+  let rank = 'Rookie';
+  if(done >= 2) rank = 'Apprentice';
+  if(done >= 4) rank = 'Technician';
+  if(done >= 6) rank = 'Senior Technician';
+  if(done >= 8) rank = 'Master Technician';
+  rankEl.textContent = rank;
+}
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
 const progressBar = document.getElementById('progressBar');
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  progressBar.style.width = progress + '%';
+  const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
+  progressBar.style.width = pct + '%';
 });
 
-/* =========================================================
-   NAVEGACIÓN ACTIVA
-   ========================================================= */
-const navLinks = document.querySelectorAll('nav a');
-const sections = document.querySelectorAll('section');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(sec => {
-    const top = sec.offsetTop - 100;
-    if(window.scrollY >= top) current = sec.id;
-  });
-  navLinks.forEach(link => {
-    link.style.color = '';
-    link.style.background = '';
-    if(link.getAttribute('href') === '#' + current){
-      link.style.color = 'var(--azul)';
-      link.style.background = 'var(--azul-muy-claro)';
-    }
-  });
-});
+// Init
+refreshHomeCards();
+updateRank();
+updateNavChecks();
 </script>
 
 </body>
