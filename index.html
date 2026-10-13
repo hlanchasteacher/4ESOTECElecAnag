@@ -22,8 +22,6 @@
     color:var(--texto); background:#f4f6f8; line-height:1.65;
     min-height:100vh; display:flex; flex-direction:column;
   }
-
-  /* HEADER */
   header{
     background:linear-gradient(135deg,#0a2a5e 0%,#0d47a1 50%,#1976d2 100%);
     color:#fff; padding:2.2rem 1.5rem 1.8rem; text-align:center;
@@ -48,8 +46,6 @@
     border:1px solid rgba(255,255,255,.25); backdrop-filter:blur(4px);
   }
   header .rank strong{color:#ffd54f;}
-
-  /* NAV */
   nav{
     position:sticky; top:0; z-index:100; background:#fff;
     border-bottom:2px solid var(--gris-borde); box-shadow:var(--sombra);
@@ -68,27 +64,19 @@
   nav a:hover{color:var(--azul); background:var(--azul-muy-claro);}
   nav a.active{color:var(--azul); border-bottom-color:var(--azul-claro);}
   nav a.done::after{content:" ✓"; color:var(--verde); font-weight:700;}
-
-  /* PROGRESS BAR */
   .progress-bar{
     position:fixed; top:0; left:0; height:3px;
     background:linear-gradient(90deg,var(--azul),var(--naranja));
     width:0%; z-index:200; transition:width .3s;
   }
-
-  /* MAIN */
   main{flex:1; max-width:920px; margin:0 auto; padding:2rem 1.2rem 4rem; width:100%;}
-
   .page{display:none; animation:fadeIn .35s ease;}
   .page.active{display:block;}
   @keyframes fadeIn{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
-
   section.card{
     background:#fff; border-radius:var(--radio); box-shadow:var(--sombra);
     padding:2rem 1.8rem; margin-bottom:1.5rem;
   }
-
-  /* MISSION BRIEF (home) */
   .mission{
     background:linear-gradient(135deg,#0a2a5e,#0d47a1);
     color:#fff; padding:2.5rem 2rem; border-radius:var(--radio);
@@ -106,12 +94,10 @@
     text-transform:uppercase; letter-spacing:1px; margin-top:.5rem;
     position:relative;
   }
-
-  /* HEADINGS */
   h2.page-title{
     color:var(--azul); font-size:1.5rem; padding-bottom:.6rem;
     border-bottom:3px solid var(--azul-muy-claro); margin-bottom:1.2rem;
-    display:flex; align-items:center; gap:.6rem;
+    display:flex; align-items:center; gap:.6rem; flex-wrap:wrap;
   }
   h2.page-title .job{
     background:var(--naranja); color:#fff; font-size:.7rem;
@@ -123,10 +109,7 @@
   p{margin-bottom:.9rem;}
   ul,ol{margin:.5rem 0 1rem 1.5rem;}
   li{margin-bottom:.4rem;}
-
-  code, .formula{
-    font-family:'Consolas','Courier New',monospace;
-  }
+  code, .formula{font-family:'Consolas','Courier New',monospace;}
   code{background:var(--gris); padding:.15rem .4rem; border-radius:4px;
     font-size:.92em; color:var(--rojo);}
   .formula{
@@ -134,8 +117,6 @@
     font-size:1.08rem; background:var(--azul-muy-claro); color:var(--azul);
     border-left:4px solid var(--azul); border-radius:6px; font-weight:600;
   }
-
-  /* BOXES */
   .box{border-radius:8px; padding:1rem 1.2rem; margin:1.2rem 0;
     border-left:5px solid;}
   .box-tip{background:var(--verde-claro); border-color:var(--verde);}
@@ -144,14 +125,10 @@
   .box-warn strong{color:var(--naranja);}
   .box-info{background:var(--azul-muy-claro); border-color:var(--azul-claro);}
   .box-info strong{color:var(--azul);}
-
-  /* TABLES */
   table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.9rem;}
   th,td{border:1px solid var(--gris-borde); padding:.55rem .7rem; text-align:left;}
   th{background:var(--azul); color:#fff; font-weight:600;}
   tr:nth-child(even) td{background:#fafafa;}
-
-  /* ACTIVITY BLOCKS */
   .sim{
     background:linear-gradient(135deg,#fff8f0 0%,#ffefe0 100%);
     border:2px solid var(--naranja); border-radius:var(--radio);
@@ -162,7 +139,6 @@
     display:flex; align-items:center; gap:.5rem;
   }
   .sim > h4::before{content:"🔬"; font-size:1.1rem;}
-
   .quiz{
     background:#f9f9f9; border:1px solid var(--gris-borde);
     border-radius:var(--radio); padding:1.2rem 1.3rem; margin:1.4rem 0;
@@ -172,7 +148,6 @@
     display:flex; align-items:center; gap:.5rem;
   }
   .quiz > h4::before{content:"✅"; font-size:1.1rem;}
-
   .question{
     margin-bottom:1.1rem; padding-bottom:.9rem;
     border-bottom:1px dashed var(--gris-borde);
@@ -186,12 +161,9 @@
   }
   .question label:hover{background:var(--azul-muy-claro);}
   .question input[type="radio"]{margin-right:.5rem;}
-
   .feedback{margin-top:.5rem; font-weight:600; font-size:.88rem;}
   .feedback.correct{color:var(--verde);}
   .feedback.incorrect{color:var(--rojo);}
-
-  /* BUTTONS */
   .btn{
     display:inline-block; background:var(--azul); color:#fff;
     padding:.6rem 1.2rem; border-radius:6px; text-decoration:none;
@@ -210,7 +182,14 @@
     font-size:.88rem; transition:all .2s;
   }
   .btn-check:hover{background:#388e3c;}
-
+  .btn-download{
+    background:linear-gradient(135deg,#c62828,#ef6c00);
+    color:#fff; padding:.9rem 2rem; border:none; border-radius:8px;
+    font-weight:700; font-size:1rem; cursor:pointer;
+    transition:all .2s; display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-download:hover{transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(198,40,40,.3);}
   .resultado{
     margin-top:1rem; padding:.8rem 1rem; border-radius:6px;
     font-weight:600; text-align:center; display:none;
@@ -218,7 +197,37 @@
   .resultado.ok{background:var(--verde-claro); color:var(--verde); display:block;}
   .resultado.ko{background:var(--rojo-claro); color:var(--rojo); display:block;}
 
-  /* PAGE NAVIGATION (bottom of each page) */
+  /* ---- CIRCUIT LOG ---- */
+  .circuit-log{
+    background:linear-gradient(135deg,#f0f7ff 0%,#e3f2fd 100%);
+    border:2px dashed var(--azul-claro); border-radius:var(--radio);
+    padding:1.2rem 1.3rem; margin:1.4rem 0;
+  }
+  .circuit-log > h4{
+    color:var(--azul); margin-top:0;
+    display:flex; align-items:center; gap:.5rem; font-size:1rem;
+  }
+  .circuit-log > h4::before{content:"📎"; font-size:1.1rem;}
+  .circuit-log label{
+    display:block; margin:.6rem 0 .2rem; font-weight:600;
+    font-size:.85rem; color:#333;
+  }
+  .circuit-log input[type="url"],
+  .circuit-log textarea{
+    width:100%; padding:.5rem .7rem; border:1px solid var(--gris-borde);
+    border-radius:6px; font-family:inherit; font-size:.85rem;
+    transition:border-color .2s; resize:vertical;
+  }
+  .circuit-log input[type="url"]:focus,
+  .circuit-log textarea:focus{
+    outline:none; border-color:var(--azul-claro);
+    box-shadow:0 0 0 3px rgba(25,118,210,.15);
+  }
+  .circuit-log input[type="url"].filled{
+    border-color:var(--verde); background:#f1f8e9;
+  }
+
+  /* ---- PAGE NAV ---- */
   .page-nav{
     display:flex; justify-content:space-between; align-items:center;
     margin-top:2rem; padding-top:1.5rem;
@@ -226,7 +235,7 @@
   }
   .page-nav .spacer{flex:1;}
 
-  /* PROJECT CARDS */
+  /* ---- PROJECT CARDS ---- */
   .reto{
     background:#fff; border:2px dashed var(--azul-claro);
     border-radius:var(--radio); padding:1.2rem 1.3rem; margin:1rem 0;
@@ -244,7 +253,7 @@
   .nivel-medio{background:var(--naranja) !important;}
   .nivel-avanzado{background:var(--rojo) !important;}
 
-  /* HOME GRID */
+  /* ---- HOME GRID ---- */
   .grid{
     display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:1rem; margin:1.5rem 0;
@@ -269,13 +278,65 @@
   .grid .job-card.done{border-color:var(--verde);}
   .grid .job-card.done .num{background:var(--verde);}
 
-  /* FOOTER */
+  /* ---- REPORT PAGE ---- */
+  .report-summary{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:.8rem; margin:1.2rem 0;
+  }
+  .report-summary .stat{
+    background:var(--azul-muy-claro); border-radius:8px;
+    padding:.9rem 1rem; text-align:center;
+    border:1px solid #bbdefb;
+  }
+  .report-summary .stat .value{
+    display:block; font-size:1.8rem; font-weight:700;
+    color:var(--azul); line-height:1.2;
+  }
+  .report-summary .stat .label{
+    font-size:.78rem; color:var(--texto-suave);
+    text-transform:uppercase; letter-spacing:.5px;
+  }
+  .student-info{
+    background:var(--gris); border-radius:var(--radio);
+    padding:1.2rem 1.3rem; margin:1.2rem 0;
+    border:1px solid var(--gris-borde);
+  }
+  .student-info label{
+    display:block; font-weight:600; font-size:.85rem;
+    margin-bottom:.3rem; color:#333;
+  }
+  .student-info input{
+    width:100%; padding:.6rem .8rem; border:1px solid var(--gris-borde);
+    border-radius:6px; font-family:inherit; font-size:.95rem;
+  }
+  .student-info input:focus{
+    outline:none; border-color:var(--azul-claro);
+    box-shadow:0 0 0 3px rgba(25,118,210,.15);
+  }
+  .module-progress{
+    list-style:none; margin:1rem 0; padding:0;
+  }
+  .module-progress li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:.5rem .8rem; border-radius:6px; margin:.3rem 0;
+    background:#fafafa; border:1px solid var(--gris-borde);
+    font-size:.88rem;
+  }
+  .module-progress li.done{
+    background:var(--verde-claro); border-color:#a5d6a7;
+  }
+  .module-progress li .check{
+    font-weight:700; color:var(--verde);
+  }
+  .module-progress li .pending{
+    color:var(--texto-suave); font-style:italic;
+  }
+
   footer{
     background:#263238; color:#b0bec5; text-align:center;
     padding:1.4rem; font-size:.82rem;
   }
   footer a{color:#90caf9; text-decoration:none;}
-
   @media (max-width:640px){
     section.card{padding:1.4rem 1.1rem;}
     header{padding:1.6rem 1rem;}
@@ -307,6 +368,7 @@
     <li><a data-page="timer">07 · 555 Timer</a></li>
     <li><a data-page="opamp">08 · Op-Amp 741</a></li>
     <li><a data-page="project">🎓 Final Project</a></li>
+    <li><a data-page="report">📄 Report</a></li>
   </ul>
 </nav>
 
@@ -316,7 +378,6 @@
      HOME
 ===================================================== -->
 <div class="page active" id="home">
-
   <div class="mission">
     <h2>Welcome to CircuitWorks</h2>
     <p>You've just been hired as a <strong>junior technician</strong> at CircuitWorks — a repair shop that brings vintage radios, old arcade cabinets, and forgotten gadgets back to life.</p>
@@ -380,10 +441,9 @@
     </div>
 
     <div class="box box-info">
-      <strong>How to earn your badge:</strong> complete the 8 jobs, pass each Check with at least 60%, and finish the Final Project. Your rank updates as you go — you can see it at the top of the page.
+      <strong>How to earn your badge:</strong> complete the 8 jobs, pass each Check with at least 60%, log your circuits, and finish the Final Project. When you're done, go to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to download your PDF report.
     </div>
   </section>
-
 </div>
 
 <!-- =====================================================
@@ -423,15 +483,15 @@
 
     <h4>Series circuit</h4>
     <ul>
-      <li><strong>Equivalent resistance:</strong> \( R_t = R_1 + R_2 + \dots + R_n \)</li>
-      <li><strong>Current:</strong> the same through every element (\( I_t = I_1 = I_2 = \dots \))</li>
+      <li><strong>Equivalent resistance:</strong> R_t = R₁ + R₂ + … + R_n</li>
+      <li><strong>Current:</strong> the same through every element (I_t = I₁ = I₂ = …)</li>
       <li><strong>Voltage:</strong> splits across elements. It acts as a <em>voltage divider</em>.</li>
       <li><strong>Power:</strong> generated equals consumed.</li>
     </ul>
 
     <h4>Parallel circuit</h4>
     <ul>
-      <li><strong>Equivalent resistance:</strong> \( 1/R_t = 1/R_1 + 1/R_2 + \dots \)</li>
+      <li><strong>Equivalent resistance:</strong> 1/R_t = 1/R₁ + 1/R₂ + …</li>
       <li><strong>Voltage:</strong> the same across every element.</li>
       <li><strong>Current:</strong> splits. It acts as a <em>current divider</em>.</li>
     </ul>
@@ -1100,17 +1160,66 @@
       <thead><tr><th>Criterion</th><th>Weight</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td>Module checks</td><td>25%</td><td>Score on the check questions in each job.</td></tr>
-        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the simulator activities and recording results.</td></tr>
+        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the simulator activities and logging circuit links.</td></tr>
         <tr><td>Final Project</td><td>30%</td><td>Design, calculations, simulation and explanation.</td></tr>
         <tr><td>Oral presentation</td><td>10%</td><td>Clarity, order and command of the topic.</td></tr>
         <tr><td>Teamwork &amp; autonomy</td><td>10%</td><td>Collaboration, task sharing, independent problem solving.</td></tr>
       </tbody>
     </table>
 
+    <div class="box box-info">
+      <strong>Ready to submit?</strong> Head to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to generate and download your PDF report.
+    </div>
+
     <div class="page-nav">
       <a class="btn" data-page="opamp">← Op-Amp 741</a>
       <span class="spacer"></span>
-      <a class="btn btn-verde" data-page="home">Back to Base →</a>
+      <a class="btn btn-verde" data-page="report">Go to Report →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
+     REPORT
+===================================================== -->
+<div class="page" id="report">
+  <section class="card">
+    <h2 class="page-title">📄 Final Report</h2>
+
+    <p>Fill in your name and review your progress. When you're ready, download your PDF report. It will include every question you answered, how many attempts you made, and the circuit links you logged.</p>
+
+    <div class="student-info">
+      <label for="studentName">Your full name</label>
+      <input type="text" id="studentName" placeholder="e.g. Alex Rivera" autocomplete="name">
+    </div>
+
+    <h3>Progress summary</h3>
+    <div class="report-summary" id="reportSummary">
+      <div class="stat"><span class="value" id="statModules">0</span><span class="label">Modules passed</span></div>
+      <div class="stat"><span class="value" id="statQuestions">0</span><span class="label">Questions answered</span></div>
+      <div class="stat"><span class="value" id="statCorrect">0</span><span class="label">Correct</span></div>
+      <div class="stat"><span class="value" id="statCircuits">0</span><span class="label">Circuits logged</span></div>
+    </div>
+
+    <h3>Module status</h3>
+    <ul class="module-progress" id="moduleProgressList">
+      <!-- filled by JS -->
+    </ul>
+
+    <div class="box box-tip">
+      <strong>Before you download:</strong> make sure you've logged your Falstad and Tinkercad links in each module page, and that you've filled in your name above.
+    </div>
+
+    <div style="text-align:center; margin:2rem 0;">
+      <button class="btn-download" onclick="generatePDF()">
+        ⬇️ Download my PDF report
+      </button>
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="project">← Final Project</a>
+      <span class="spacer"></span>
+      <a class="btn" data-page="home">Back to Base →</a>
     </div>
   </section>
 </div>
@@ -1122,31 +1231,80 @@
   <p>Simulators: <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad</a> · <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad</a></p>
 </footer>
 
+<!-- PDF libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
 <script>
 /* =========================================================
+   CONSTANTS
+========================================================= */
+const MODULES = ['fundamentals','resistors','capacitors','diodes','transistors','supplies','timer','opamp'];
+const MODULE_NAMES = {
+  fundamentals: '01 · Fundamentals',
+  resistors: '02 · Resistors',
+  capacitors: '03 · Capacitors',
+  diodes: '04 · Diodes',
+  transistors: '05 · Transistors',
+  supplies: '06 · Power Supplies',
+  timer: '07 · 555 Timer',
+  opamp: '08 · Op-Amp 741'
+};
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+function getDone(){
+  try{ return JSON.parse(localStorage.getItem('cw_done') || '[]'); }
+  catch(e){ return []; }
+}
+function saveDone(arr){
+  localStorage.setItem('cw_done', JSON.stringify(arr));
+}
+
+function getQuizData(){
+  try{ return JSON.parse(localStorage.getItem('cw_quizData') || '{}'); }
+  catch(e){ return {}; }
+}
+function saveQuizData(data){
+  localStorage.setItem('cw_quizData', JSON.stringify(data));
+}
+
+function getCircuitData(){
+  try{ return JSON.parse(localStorage.getItem('cw_circuits') || '{}'); }
+  catch(e){ return {}; }
+}
+function saveCircuitData(data){
+  localStorage.setItem('cw_circuits', JSON.stringify(data));
+}
+
+function getStudentName(){
+  return localStorage.getItem('cw_studentName') || '';
+}
+function saveStudentName(name){
+  localStorage.setItem('cw_studentName', name);
+}
+
+/* =========================================================
    PAGE ROUTER
-   ========================================================= */
+========================================================= */
 function showPage(id){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById(id);
   if(!target) return;
   target.classList.add('active');
 
-  // nav highlight
   document.querySelectorAll('nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === id);
   });
 
-  // update hash
   if(location.hash !== '#' + id) history.replaceState(null,'','#' + id);
-
   window.scrollTo({top:0, behavior:'smooth'});
 
-  // if returning to home, refresh card done states
   if(id === 'home') refreshHomeCards();
+  if(id === 'report') refreshReportPage();
 }
 
-// click on any element with data-page
 document.addEventListener('click', e => {
   const el = e.target.closest('[data-page]');
   if(el){
@@ -1155,26 +1313,62 @@ document.addEventListener('click', e => {
   }
 });
 
-// handle direct hash on load
 window.addEventListener('load', () => {
   const hash = location.hash.replace('#','');
   if(hash && document.getElementById(hash)) showPage(hash);
   refreshHomeCards();
   updateRank();
+  updateNavChecks();
+  injectCircuitLogs();
+  prefillStudentName();
+  if(document.getElementById('report') && document.getElementById('report').classList.contains('active')){
+    refreshReportPage();
+  }
 });
 
 /* =========================================================
-   QUIZ CHECK
+   QUIZ CHECK (with tracking)
 ========================================================= */
+function getAnswerText(question, value){
+  const input = question.querySelector(`input[type="radio"][value="${value}"]`);
+  if(!input) return '';
+  // grab the label text and strip the letter prefix
+  return input.parentElement.textContent.trim();
+}
+
 function checkQuiz(btn){
   const quiz = btn.closest('.quiz');
   const questions = quiz.querySelectorAll('.question');
   const moduleName = quiz.dataset.module || 'misc';
   let correct = 0;
 
-  questions.forEach(q => {
+  const allData = getQuizData();
+  if(!allData[moduleName]) allData[moduleName] = { questions: {} };
+
+  questions.forEach((q, idx) => {
     const correctAnswer = q.dataset.answer;
     const selected = q.querySelector('input[type="radio"]:checked');
+    const qKey = 'q' + (idx + 1);
+
+    // Get or create question record
+    if(!allData[moduleName].questions[qKey]){
+      allData[moduleName].questions[qKey] = {
+        text: q.querySelector('p').textContent.trim(),
+        correctAnswer: correctAnswer,
+        correctAnswerText: getAnswerText(q, correctAnswer),
+        attempts: 0,
+        lastAnswer: null,
+        lastAnswerText: null,
+        correct: false
+      };
+    }
+    const rec = allData[moduleName].questions[qKey];
+    rec.text = q.querySelector('p').textContent.trim();
+    rec.correctAnswer = correctAnswer;
+    rec.correctAnswerText = getAnswerText(q, correctAnswer);
+    rec.attempts += 1;
+
+    // Remove previous feedback
     let fb = q.querySelector('.feedback');
     if(fb) fb.remove();
     fb = document.createElement('div');
@@ -1183,16 +1377,25 @@ function checkQuiz(btn){
     if(!selected){
       fb.textContent = '⚠️ No option selected.';
       fb.classList.add('incorrect');
-    } else if(selected.value === correctAnswer){
-      fb.textContent = '✅ Correct!';
-      fb.classList.add('correct');
-      correct++;
     } else {
-      fb.textContent = '❌ Incorrect. Review the theory above.';
-      fb.classList.add('incorrect');
+      rec.lastAnswer = selected.value;
+      rec.lastAnswerText = getAnswerText(q, selected.value);
+
+      if(selected.value === correctAnswer){
+        fb.textContent = '✅ Correct!';
+        fb.classList.add('correct');
+        rec.correct = true;
+        correct++;
+      } else {
+        fb.textContent = '❌ Incorrect. Review the theory above.';
+        fb.classList.add('incorrect');
+        rec.correct = false;
+      }
     }
     q.appendChild(fb);
   });
+
+  saveQuizData(allData);
 
   const total = questions.length;
   const pct = Math.round((correct/total)*100);
@@ -1200,26 +1403,19 @@ function checkQuiz(btn){
   resultado.className = 'resultado ' + (pct >= 60 ? 'ok' : 'ko');
   resultado.textContent = `Score: ${correct}/${total} (${pct}%)`;
 
-  // mark module as done if passing
   if(pct >= 60 && moduleName !== 'misc'){
     markDone(moduleName);
   }
 }
 
 /* =========================================================
-   PROGRESS TRACKING (localStorage)
+   PROGRESS TRACKING
 ========================================================= */
-const MODULES = ['fundamentals','resistors','capacitors','diodes','transistors','supplies','timer','opamp'];
-
-function getDone(){
-  try{ return JSON.parse(localStorage.getItem('cw_done') || '[]'); }
-  catch(e){ return []; }
-}
 function markDone(id){
   const done = getDone();
   if(!done.includes(id)){
     done.push(id);
-    localStorage.setItem('cw_done', JSON.stringify(done));
+    saveDone(done);
     refreshHomeCards();
     updateRank();
     updateNavChecks();
@@ -1252,6 +1448,368 @@ function updateRank(){
   rankEl.textContent = rank;
 }
 
+function getRankText(){
+  const done = getDone().length;
+  if(done >= 8) return 'Master Technician';
+  if(done >= 6) return 'Senior Technician';
+  if(done >= 4) return 'Technician';
+  if(done >= 2) return 'Apprentice';
+  return 'Rookie';
+}
+
+/* =========================================================
+   CIRCUIT LOG INJECTION
+========================================================= */
+function injectCircuitLogs(){
+  // For each module page, inject a circuit log after the last .sim block
+  MODULES.forEach(modId => {
+    const page = document.getElementById(modId);
+    if(!page) return;
+
+    const sims = page.querySelectorAll('.sim');
+    if(sims.length === 0) return;
+
+    // Build the log block
+    const log = document.createElement('div');
+    log.className = 'circuit-log';
+    log.innerHTML = `
+      <h4>Log your circuit</h4>
+      <p style="font-size:.88rem; margin-bottom:.5rem; color:#555;">
+        After building and testing your circuit, export it and paste the link here. This will appear in your final PDF report.
+      </p>
+      <label>Falstad link (File → Export → Export Link):</label>
+      <input type="url"
+             data-circuit-module="${modId}"
+             data-circuit-type="falstad"
+             placeholder="https://www.falstad.com/circuit/circuitjs.html?...">
+      <label>Tinkercad link (Share → Copy link):</label>
+      <input type="url"
+             data-circuit-module="${modId}"
+             data-circuit-type="tinkercad"
+             placeholder="https://www.tinkercad.com/things/...">
+      <label>Notes / observations:</label>
+      <textarea data-circuit-module="${modId}"
+                data-circuit-type="notes"
+                rows="3"
+                placeholder="What did you observe? Any difficulties?"></textarea>
+    `;
+    sims[sims.length - 1].after(log);
+
+    // Prefill saved values
+    const data = getCircuitData();
+    const saved = data[modId] || {};
+    log.querySelectorAll('[data-circuit-type]').forEach(input => {
+      const type = input.dataset.circuitType;
+      if(saved[type]){
+        input.value = saved[type];
+        if(type !== 'notes' && saved[type].trim() !== ''){
+          input.classList.add('filled');
+        }
+      }
+    });
+  });
+
+  // Save on input
+  document.addEventListener('input', e => {
+    const el = e.target;
+    if(el.dataset && el.dataset.circuitModule){
+      const data = getCircuitData();
+      const mod = el.dataset.circuitModule;
+      const type = el.dataset.circuitType;
+      if(!data[mod]) data[mod] = {};
+      data[mod][type] = el.value;
+      saveCircuitData(data);
+
+      if(type !== 'notes'){
+        el.classList.toggle('filled', el.value.trim() !== '');
+      }
+    }
+  });
+}
+
+function countLoggedCircuits(){
+  const data = getCircuitData();
+  let count = 0;
+  MODULES.forEach(mod => {
+    const m = data[mod] || {};
+    if((m.falstad && m.falstad.trim()) || (m.tinkercad && m.tinkercad.trim())){
+      count++;
+    }
+  });
+  return count;
+}
+
+/* =========================================================
+   STUDENT NAME
+========================================================= */
+function prefillStudentName(){
+  const input = document.getElementById('studentName');
+  if(!input) return;
+  input.value = getStudentName();
+  input.addEventListener('input', () => {
+    saveStudentName(input.value);
+    refreshReportPage();
+  });
+}
+
+/* =========================================================
+   REPORT PAGE
+========================================================= */
+function refreshReportPage(){
+  const done = getDone();
+  const quizData = getQuizData();
+
+  // Stats
+  let totalQ = 0, correctQ = 0;
+  MODULES.forEach(mod => {
+    const qs = (quizData[mod] && quizData[mod].questions) || {};
+    Object.values(qs).forEach(q => {
+      totalQ++;
+      if(q.correct) correctQ++;
+    });
+  });
+
+  document.getElementById('statModules').textContent = done.length + '/8';
+  document.getElementById('statQuestions').textContent = totalQ;
+  document.getElementById('statCorrect').textContent = correctQ;
+  document.getElementById('statCircuits').textContent = countLoggedCircuits() + '/8';
+
+  // Module list
+  const list = document.getElementById('moduleProgressList');
+  list.innerHTML = '';
+  MODULES.forEach(mod => {
+    const li = document.createElement('li');
+    const qs = (quizData[mod] && quizData[mod].questions) || {};
+    const answered = Object.keys(qs).length;
+    const modDone = done.includes(mod);
+    const circuit = (getCircuitData()[mod] || {});
+    const hasCircuit = (circuit.falstad && circuit.falstad.trim()) || (circuit.tinkercad && circuit.tinkercad.trim());
+
+    li.className = modDone ? 'done' : '';
+    li.innerHTML = `
+      <span><strong>${MODULE_NAMES[mod]}</strong></span>
+      <span>
+        ${answered > 0 ? answered + ' questions' : 'no quiz yet'}
+        ${hasCircuit ? ' · 📎 circuit logged' : ''}
+        ${modDone ? ' <span class="check">✓ passed</span>' : ' <span class="pending">pending</span>'}
+      </span>
+    `;
+    list.appendChild(li);
+  });
+}
+
+/* =========================================================
+   PDF GENERATION
+========================================================= */
+function generatePDF(){
+  if(typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF){
+    alert('The PDF library failed to load. Please check your internet connection and reload the page.');
+    return;
+  }
+  if(typeof window.jspdf.jsPDF.API.autoTable === 'undefined'){
+    // fallback: try doc.autoTable
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+  const studentName = (document.getElementById('studentName').value || 'Unnamed Student').trim();
+  const done = getDone();
+  const quizData = getQuizData();
+  const circuitData = getCircuitData();
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 15;
+
+  /* --- HEADER --- */
+  doc.setFillColor(13, 71, 161);
+  doc.rect(0, 0, pageWidth, 28, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text('CircuitWorks · Analog Electronics Lab', pageWidth / 2, 13, { align: 'center' });
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.text('Student Report', pageWidth / 2, 21, { align: 'center' });
+
+  /* --- STUDENT INFO --- */
+  let y = 40;
+  doc.setTextColor(33, 33, 33);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Student:', margin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.text(studentName, margin + 25, y);
+
+  doc.setFont('helvetica', 'bold');
+  doc.text('Date:', pageWidth - margin - 50, y);
+  doc.setFont('helvetica', 'normal');
+  doc.text(new Date().toLocaleDateString(), pageWidth - margin - 30, y);
+
+  y += 7;
+  doc.setFont('helvetica', 'bold');
+  doc.text('Rank:', margin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.text(getRankText(), margin + 25, y);
+
+  doc.setFont('helvetica', 'bold');
+  doc.text('Modules passed:', pageWidth - margin - 50, y);
+  doc.setFont('helvetica', 'normal');
+  doc.text(done.length + ' / 8', pageWidth - margin - 10, y);
+
+  y += 4;
+  doc.setDrawColor(224, 224, 224);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 6;
+
+  /* --- PER MODULE --- */
+  MODULES.forEach(mod => {
+    const questions = (quizData[mod] && quizData[mod].questions) || {};
+    const circuit = circuitData[mod] || {};
+    const qKeys = Object.keys(questions);
+    const hasCircuit = (circuit.falstad && circuit.falstad.trim()) || (circuit.tinkercad && circuit.tinkercad.trim());
+    const hasNotes = circuit.notes && circuit.notes.trim();
+
+    // Module header
+    if(y > pageHeight - 60){
+      doc.addPage();
+      y = 20;
+    }
+    doc.setFillColor(227, 242, 253);
+    doc.rect(margin, y - 5, pageWidth - 2 * margin, 8, 'F');
+    doc.setTextColor(13, 71, 161);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.text(MODULE_NAMES[mod], margin + 2, y);
+    doc.setTextColor(80, 80, 80);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    const status = done.includes(mod) ? 'PASSED' : (qKeys.length > 0 ? 'attempted' : 'not attempted');
+    doc.text(status, pageWidth - margin - 2, y, { align: 'right' });
+    y += 6;
+
+    // Questions table
+    if(qKeys.length > 0){
+      const rows = qKeys.map((k, i) => {
+        const q = questions[k];
+        return [
+          (i + 1) + '. ' + q.text.replace(/^\d+\.\s*/, ''),
+          q.lastAnswerText || '—',
+          q.correctAnswerText || '—',
+          String(q.attempts),
+          q.correct ? 'Correct' : 'Incorrect'
+        ];
+      });
+
+      if(typeof doc.autoTable === 'function'){
+        doc.autoTable({
+          startY: y,
+          head: [['Question', 'Your answer', 'Correct answer', 'Attempts', 'Result']],
+          body: rows,
+          theme: 'grid',
+          styles: { fontSize: 8, cellPadding: 1.8, valign: 'top', textColor: [33,33,33] },
+          headStyles: { fillColor: [13, 71, 161], textColor: [255,255,255], fontStyle: 'bold', fontSize: 8.5 },
+          columnStyles: {
+            0: { cellWidth: 75 },
+            1: { cellWidth: 35 },
+            2: { cellWidth: 35 },
+            3: { cellWidth: 15, halign: 'center' },
+            4: { cellWidth: 20, halign: 'center' }
+          },
+          margin: { left: margin, right: margin },
+          alternateRowStyles: { fillColor: [250, 250, 250] },
+          didParseCell: function(data){
+            if(data.section === 'body' && data.column.index === 4){
+              if(data.cell.raw === 'Correct'){
+                data.cell.styles.textColor = [46, 125, 50];
+                data.cell.styles.fontStyle = 'bold';
+              } else if(data.cell.raw === 'Incorrect'){
+                data.cell.styles.textColor = [198, 40, 40];
+                data.cell.styles.fontStyle = 'bold';
+              }
+            }
+          }
+        });
+        y = doc.lastAutoTable.finalY + 5;
+      } else {
+        // fallback: plain text
+        doc.setFontSize(9);
+        rows.forEach(r => {
+          if(y > pageHeight - 20){ doc.addPage(); y = 20; }
+          doc.text(r.join(' | '), margin, y);
+          y += 5;
+        });
+        y += 3;
+      }
+    } else {
+      doc.setTextColor(120, 120, 120);
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(9);
+      doc.text('(no quiz attempted for this module)', margin + 2, y);
+      y += 6;
+      doc.setFont('helvetica', 'normal');
+    }
+
+    // Circuit section
+    if(hasCircuit || hasNotes){
+      if(y > pageHeight - 40){
+        doc.addPage();
+        y = 20;
+      }
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(239, 108, 0);
+      doc.text('Circuit log:', margin + 2, y);
+      y += 5;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(33, 33, 33);
+
+      if(circuit.falstad && circuit.falstad.trim()){
+        const lines = doc.splitTextToSize('Falstad: ' + circuit.falstad.trim(), pageWidth - 2 * margin - 6);
+        if(y + lines.length * 4 > pageHeight - 15){ doc.addPage(); y = 20; }
+        doc.text(lines, margin + 4, y);
+        y += lines.length * 4 + 1;
+      }
+      if(circuit.tinkercad && circuit.tinkercad.trim()){
+        const lines = doc.splitTextToSize('Tinkercad: ' + circuit.tinkercad.trim(), pageWidth - 2 * margin - 6);
+        if(y + lines.length * 4 > pageHeight - 15){ doc.addPage(); y = 20; }
+        doc.text(lines, margin + 4, y);
+        y += lines.length * 4 + 1;
+      }
+      if(hasNotes){
+        const noteLines = doc.splitTextToSize('Notes: ' + circuit.notes.trim(), pageWidth - 2 * margin - 6);
+        if(y + noteLines.length * 4 > pageHeight - 15){ doc.addPage(); y = 20; }
+        doc.text(noteLines, margin + 4, y);
+        y += noteLines.length * 4 + 1;
+      }
+      y += 3;
+    }
+
+    y += 3;
+  });
+
+  /* --- FOOTER on each page --- */
+  const totalPages = doc.internal.getNumberOfPages();
+  for(let i = 1; i <= totalPages; i++){
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text(
+      'CircuitWorks · Analog Electronics Lab  —  Page ' + i + ' of ' + totalPages,
+      pageWidth / 2,
+      pageHeight - 8,
+      { align: 'center' }
+    );
+  }
+
+  /* --- SAVE --- */
+  const safeName = studentName.replace(/[^\w\s\-]/g, '').replace(/\s+/g, '_') || 'Student';
+  const dateStr = new Date().toISOString().slice(0, 10);
+  doc.save('CircuitWorks_Report_' + safeName + '_' + dateStr + '.pdf');
+}
+
 /* =========================================================
    PROGRESS BAR
 ========================================================= */
@@ -1262,11 +1820,6 @@ window.addEventListener('scroll', () => {
   const pct = docHeight > 0 ? (scrollTop/docHeight)*100 : 0;
   progressBar.style.width = pct + '%';
 });
-
-// Init
-refreshHomeCards();
-updateRank();
-updateNavChecks();
 </script>
 
 </body>
