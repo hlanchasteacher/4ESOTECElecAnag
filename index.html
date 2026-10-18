@@ -327,6 +327,34 @@
     color:var(--texto-suave); font-style:italic;
   }
 
+  /* ---- START HERE PAGE ---- */
+  .step-card{
+    display:flex; gap:.8rem; align-items:flex-start;
+    background:#fff; border:2px solid var(--gris-borde);
+    border-radius:var(--radio); padding:1.1rem 1.2rem; margin:1rem 0;
+  }
+  .step-num{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--azul); color:#fff; width:34px; height:34px;
+    border-radius:50%; font-weight:700; font-size:1rem;
+    flex-shrink:0; margin-top:.1rem;
+  }
+  .step-card h4{margin:0 0 .4rem; color:var(--azul); font-size:1.02rem;}
+  .step-card p{margin:0 0 .4rem; font-size:.92rem;}
+  .step-card ul{margin:.3rem 0 .2rem 1.2rem; font-size:.9rem;}
+  .step-card li{margin-bottom:.25rem;}
+  .checklist{list-style:none; margin:1rem 0; padding:0;}
+  .checklist li{
+    padding:.45rem .8rem; margin:.3rem 0; border-radius:6px;
+    background:#fafafa; border:1px solid var(--gris-borde); font-size:.9rem;
+  }
+  .checklist li::before{content:"☐ "; font-weight:700; color:var(--azul);}
+  .nick{
+    display:inline-block; background:#fff3e0; border:1px dashed var(--naranja);
+    padding:.1rem .5rem; border-radius:5px; font-family:'Consolas',monospace;
+    color:#b23c00; font-weight:700;
+  }
+
   footer{
     background:#263238; color:#b0bec5; text-align:center;
     padding:1.4rem; font-size:.82rem;
@@ -353,7 +381,8 @@
 
 <nav>
   <ul id="navList">
-    <li><a data-page="home" class="active">🏠 Base</a></li>
+    <li><a data-page="start" class="active">🚀 Start Here</a></li>
+    <li><a data-page="home">🏠 Base</a></li>
     <li><a data-page="fundamentals">01 · Fundamentals</a></li>
     <li><a data-page="resistors">02 · Resistors</a></li>
     <li><a data-page="capacitors">03 · Capacitors</a></li>
@@ -370,9 +399,107 @@
 <main>
 
 <!-- =====================================================
+     START HERE
+===================================================== -->
+<div class="page active" id="start">
+  <section class="card">
+    <h2 class="page-title">🚀 Start Here</h2>
+
+    <div class="box box-warn">
+      <strong>Individual work:</strong> every job, the Final Project and the PDF report are completed and submitted by you. You may discuss ideas with classmates, but the circuits, notes and answers must be your own.
+    </div>
+
+    <p>Welcome, technician. Read this page once — it takes two minutes and saves you an hour later.</p>
+
+    <div class="step-card">
+      <span class="step-num">1</span>
+      <div>
+        <h4>Join the Tinkercad classroom</h4>
+        <p>You will build every circuit in Tinkercad. Join the class first:</p>
+        <ul>
+          <li>Open this link: <a href="https://www.tinkercad.com/joinclass/EHHBKFMU5" target="_blank" rel="noopener"><strong>tinkercad.com/joinclass/EHHBKFMU5</strong></a></li>
+          <li>Click <strong>"Join with student login"</strong>.</li>
+          <li>Enter your nickname exactly like your school email, without the @ part:<br>
+            <span class="nick">firstname.lastname</span> — for example <span class="nick">alex.rivera</span></li>
+          <li>Click <strong>Join</strong>. You're in.</li>
+        </ul>
+        <p style="font-size:.85rem; color:#777; margin-top:.5rem;">
+          ⚠️ Use lowercase and a dot, no spaces. If you already have a Tinkercad account with your school email, log in first and then open the link.
+        </p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">2</span>
+      <div>
+        <h4>Work through the 8 jobs</h4>
+        <p>Each job follows the same pattern:</p>
+        <ul>
+          <li><strong>Read</strong> the theory on the page.</li>
+          <li><strong>Answer the Check</strong> — you need <strong>60% or more</strong> to pass the job. You can retry as many times as you want, but every attempt is recorded.</li>
+          <li><strong>Build the circuit in Tinkercad</strong> by following the steps in the orange "Simulation" box.</li>
+          <li><strong>Log your circuit</strong> in the blue box: paste the Tinkercad share link and add your notes.</li>
+        </ul>
+        <p style="font-size:.85rem; color:#777; margin-top:.5rem;">
+          To get the link: in Tinkercad click <strong>Share → Copy link</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">3</span>
+      <div>
+        <h4>Finish with the Final Project</h4>
+        <ul>
+          <li>Choose <strong>one mission</strong> from the Final Project page.</li>
+          <li>Design it in Tinkercad, get it working, and share the project link in Google Classroom.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">4</span>
+      <div>
+        <h4>Download your PDF report</h4>
+        <ul>
+          <li>Go to the <strong>📄 Report</strong> page.</li>
+          <li>Type your <strong>full name</strong> — it goes on the report.</li>
+          <li>Click <strong>Download my PDF report</strong> and upload it to Google Classroom.</li>
+        </ul>
+        <p style="font-size:.85rem; color:#777; margin-top:.5rem;">
+          The PDF contains every question, your answers, how many attempts you made, and all your Tinkercad links.
+        </p>
+      </div>
+    </div>
+
+    <div class="box box-tip">
+      <strong>Before you submit, check that:</strong>
+      <ul class="checklist">
+        <li>You joined the Tinkercad classroom with your <em>firstname.lastname</em> nickname.</li>
+        <li>You passed the Check in all 8 jobs (60% or more).</li>
+        <li>You pasted a Tinkercad link in every job's circuit log.</li>
+        <li>You completed your Final Project and shared the Tinkercad link in Google Classroom.</li>
+        <li>Your full name is typed on the Report page.</li>
+        <li>You downloaded the PDF and uploaded it.</li>
+      </ul>
+    </div>
+
+    <div class="box box-warn">
+      <strong>Important:</strong> your progress is saved in this browser. Don't switch computers or clear your browser data, or you'll lose your answers.
+    </div>
+
+    <div class="page-nav">
+      <a class="btn" data-page="home">See the job board →</a>
+      <span class="spacer"></span>
+      <a class="btn btn-verde" data-page="fundamentals">Start Job 01 →</a>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================
      HOME
 ===================================================== -->
-<div class="page active" id="home">
+<div class="page" id="home">
   <div class="mission">
     <h2>Welcome to CircuitWorks</h2>
     <p>You've just been hired as a <strong>junior technician</strong> at CircuitWorks — a repair shop that brings vintage radios, old arcade cabinets, and forgotten gadgets back to life.</p>
@@ -1108,7 +1235,7 @@
   <section class="card">
     <h2 class="page-title"><span class="job">Final Exam</span>Design your own circuit</h2>
 
-    <p>You've made it to the final shift. Now <strong>apply everything you've learned</strong>. Pick <strong>one</strong> of the missions below, design it in Tinkercad, and present it to the rest of the shop.</p>
+    <p>You've made it to the final shift. Now <strong>apply everything you've learned</strong>. Pick <strong>one</strong> of the missions below, design it in Tinkercad, and get it working. When it's done, share the project link in Google Classroom.</p>
 
     <div class="reto">
       <h4>Mission 1: Automatic night light <span class="nivel nivel-basico">Basic</span></h4>
@@ -1147,23 +1274,28 @@
     </div>
 
     <div class="box box-tip">
-      <strong>Presentation tips:</strong> prepare 5 slides — 1) problem, 2) circuit schematic, 3) calculations, 4) Tinkercad simulation running, 5) conclusions and challenges.
+      <strong>Before you submit:</strong>
+      <ul class="checklist">
+        <li>Your circuit works in Tinkercad.</li>
+        <li>Your calculations are correct and justified.</li>
+        <li>You can explain what each stage of the circuit does.</li>
+        <li>You've shared the Tinkercad link in Google Classroom.</li>
+      </ul>
     </div>
 
     <h3>Achievements</h3>
     <table>
       <thead><tr><th>Criterion</th><th>Weight</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td>Module checks</td><td>25%</td><td>Score on the check questions in each job.</td></tr>
-        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the Tinkercad activities and logging circuit links.</td></tr>
+        <tr><td>Module checks</td><td>30%</td><td>Score on the check questions in each job.</td></tr>
+        <tr><td>Simulation tasks</td><td>30%</td><td>Completing the Tinkercad activities and logging circuit links.</td></tr>
         <tr><td>Final Project</td><td>30%</td><td>Design, calculations, simulation and explanation.</td></tr>
-        <tr><td>Oral presentation</td><td>10%</td><td>Clarity, order and command of the topic.</td></tr>
-        <tr><td>Teamwork &amp; autonomy</td><td>10%</td><td>Collaboration, task sharing, independent problem solving.</td></tr>
+        <tr><td>Autonomy &amp; work method</td><td>10%</td><td>Independent work, time management, accurate self-recording.</td></tr>
       </tbody>
     </table>
 
     <div class="box box-info">
-      <strong>Ready to submit?</strong> Head to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to generate and download your PDF report.
+      <strong>Ready to submit?</strong> Share your Tinkercad project link in Google Classroom, then head to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to generate and download your PDF report.
     </div>
 
     <div class="page-nav">
@@ -1180,6 +1312,10 @@
 <div class="page" id="report">
   <section class="card">
     <h2 class="page-title">📄 Final Report</h2>
+
+    <div class="box box-warn">
+      <strong>Individual submission:</strong> this report must reflect your own work. If the name on the report doesn't match the Tinkercad nickname in the links, it won't be graded.
+    </div>
 
     <p>Fill in your name and review your progress. When you're ready, download your PDF report. It will include every question you answered, how many attempts you made, and the Tinkercad link you logged for each module.</p>
 
@@ -1465,7 +1601,7 @@ function injectCircuitLogs(){
     log.innerHTML = `
       <h4>Log your Tinkercad circuit</h4>
       <p style="font-size:.88rem; margin-bottom:.5rem; color:#555;">
-        After building and testing your circuit in Tinkercad, click <strong>Share → Copy link</strong> and paste it here. This will appear in your final PDF report.
+        In Tinkercad, click <strong>Share → Copy link</strong> and paste it below. This will appear in your final PDF report.
       </p>
       <label>Tinkercad link:</label>
       <input type="url"
