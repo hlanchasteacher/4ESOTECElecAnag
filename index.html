@@ -197,7 +197,6 @@
   .resultado.ok{background:var(--verde-claro); color:var(--verde); display:block;}
   .resultado.ko{background:var(--rojo-claro); color:var(--rojo); display:block;}
 
-  /* ---- CIRCUIT LOG ---- */
   .circuit-log{
     background:linear-gradient(135deg,#f0f7ff 0%,#e3f2fd 100%);
     border:2px dashed var(--azul-claro); border-radius:var(--radio);
@@ -227,7 +226,6 @@
     border-color:var(--verde); background:#f1f8e9;
   }
 
-  /* ---- PAGE NAV ---- */
   .page-nav{
     display:flex; justify-content:space-between; align-items:center;
     margin-top:2rem; padding-top:1.5rem;
@@ -235,7 +233,6 @@
   }
   .page-nav .spacer{flex:1;}
 
-  /* ---- PROJECT CARDS ---- */
   .reto{
     background:#fff; border:2px dashed var(--azul-claro);
     border-radius:var(--radio); padding:1.2rem 1.3rem; margin:1rem 0;
@@ -253,7 +250,6 @@
   .nivel-medio{background:var(--naranja) !important;}
   .nivel-avanzado{background:var(--rojo) !important;}
 
-  /* ---- HOME GRID ---- */
   .grid{
     display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:1rem; margin:1.5rem 0;
@@ -278,7 +274,6 @@
   .grid .job-card.done{border-color:var(--verde);}
   .grid .job-card.done .num{background:var(--verde);}
 
-  /* ---- REPORT PAGE ---- */
   .report-summary{
     display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
     gap:.8rem; margin:1.2rem 0;
@@ -388,7 +383,7 @@
 
   <section class="card">
     <h2 class="page-title">Your job board</h2>
-    <p>Each job is a module. Click one to start your shift. You'll need to <strong>read the theory</strong>, <strong>pass the check</strong>, and <strong>run the simulation</strong> before moving on.</p>
+    <p>Each job is a module. Click one to start your shift. You'll need to <strong>read the theory</strong>, <strong>pass the check</strong>, and <strong>build the circuit in Tinkercad</strong> before moving on.</p>
 
     <div class="grid" id="homeGrid">
       <a class="job-card" data-page="fundamentals">
@@ -434,14 +429,13 @@
     </div>
 
     <div class="box box-tip">
-      <strong>Tools of the trade:</strong> you'll use two online simulators throughout your shift.
+      <strong>Tool of the trade:</strong> you'll use <strong>Tinkercad Circuits</strong> throughout your shift.
       <br>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad Simulator ↗</a>
       <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad Circuits ↗</a>
     </div>
 
     <div class="box box-info">
-      <strong>How to earn your badge:</strong> complete the 8 jobs, pass each Check with at least 60%, log your circuits, and finish the Final Project. When you're done, go to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to download your PDF report.
+      <strong>How to earn your badge:</strong> complete the 8 jobs, pass each Check with at least 60%, log your Tinkercad circuit link, and finish the Final Project. When you're done, go to the <a data-page="report" style="color:var(--azul); font-weight:700; cursor:pointer;">📄 Report page</a> to download your PDF report.
     </div>
   </section>
 </div>
@@ -553,14 +547,13 @@
     <div class="sim">
       <h4>Simulation: prove Ohm's Law yourself</h4>
       <ol>
-        <li>Open <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad ↗</a>.</li>
-        <li>Drag a <strong>battery</strong> (Add → Inputs and Sources → DC Voltage Source).</li>
-        <li>Add a <strong>resistor</strong> (Add → Passive Components → Resistor) in series.</li>
-        <li>Close the circuit with wires.</li>
-        <li>Add an <strong>ammeter</strong> in series and a <strong>voltmeter</strong> across the resistor.</li>
-        <li>Set the battery to 10 V and the resistor to 100 Ω. Note the current. Repeat with 200 Ω, 500 Ω and 1 kΩ. Does I = V/R hold?</li>
+        <li>Open <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad Circuits ↗</a> and create a new circuit.</li>
+        <li>Place a 9 V battery, a resistor, and a multimeter on the breadboard.</li>
+        <li>Connect the multimeter in series to measure current, then in parallel to measure voltage across the resistor.</li>
+        <li>Start with a 100 Ω resistor. Record voltage and current. Repeat with 200 Ω, 500 Ω, and 1 kΩ.</li>
+        <li>Calculate V/I for each case. Does it match the resistor value? Does I = V/R hold?</li>
       </ol>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
     <div class="page-nav">
@@ -631,9 +624,8 @@
 
     <div class="sim">
       <h4>Simulation: voltage divider + LED limiter</h4>
-      <p><strong>Task A — Voltage divider:</strong> in Falstad, build a 9 V battery with two resistors in series (470 Ω and 220 Ω). Measure the voltage across each one and compare with your calculations.</p>
-      <p><strong>Task B — LED limiter:</strong> in Tinkercad, build a 5 V battery, a resistor and an LED in series. Calculate R so the current is 20 mA (V_LED = 2 V). Check your answer in the simulator.</p>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <p><strong>Task A — Voltage divider:</strong> in Tinkercad, build a 9 V battery with two resistors in series (470 Ω and 220 Ω). Use the multimeter to measure the voltage across each resistor. Compare with your calculations.</p>
+      <p><strong>Task B — LED limiter:</strong> in Tinkercad, build a 5 V battery, a resistor and an LED in series. Calculate R so the current is 20 mA (V_LED = 2 V). Check your answer by measuring the current with the multimeter.</p>
       <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
@@ -711,13 +703,13 @@
     <div class="sim">
       <h4>Simulation: charge and discharge a capacitor</h4>
       <ol>
-        <li>In <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad ↗</a>, build: 9 V battery + switch + 10 kΩ resistor + 100 μF capacitor.</li>
-        <li>Place the oscilloscope probe across the capacitor.</li>
+        <li>In Tinkercad, build: 9 V battery + switch + 10 kΩ resistor + 100 μF capacitor.</li>
+        <li>Connect the oscilloscope across the capacitor.</li>
         <li>Close the switch and watch the charging curve. How long until it reaches 99% of the supply voltage?</li>
         <li>Change R to 20 kΩ and to 5 kΩ. How does the charging time change?</li>
         <li>Verify that t = 5·R·C holds.</li>
       </ol>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
     <div class="page-nav">
@@ -785,9 +777,8 @@
 
     <div class="sim">
       <h4>Simulation: half-wave and bridge rectifiers</h4>
-      <p><strong>Task A — Half-wave:</strong> in Falstad, build an AC source + one diode + a resistor. Watch the input and output on the oscilloscope. Which half of the wave is removed?</p>
-      <p><strong>Task B — Bridge:</strong> replace the diode with a bridge rectifier (4 diodes). Watch the output. How does it differ?</p>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <p><strong>Task A — Half-wave:</strong> in Tinkercad, build a function generator (AC, 5 V amplitude, 50 Hz) + one diode + a resistor. Connect the oscilloscope to see input and output. Which half of the wave is removed?</p>
+      <p><strong>Task B — Bridge:</strong> replace the single diode with a bridge rectifier (4 diodes). Watch the output. How does it differ?</p>
       <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
@@ -907,6 +898,10 @@
       <strong>Chain:</strong> 230 V AC → Transformer → Reduced AC → Bridge → Pulsating DC → Capacitor → DC with ripple → Zener → Constant DC.
     </div>
 
+    <div class="box box-tip">
+      <strong>Tinkercad tip:</strong> Tinkercad doesn't have a transformer component. Use the <strong>function generator</strong> to represent the transformer's reduced AC output (set it to 10 V amplitude, 50 Hz).
+    </div>
+
     <div class="quiz" data-quiz data-module="supplies">
       <h4>Check your understanding</h4>
 
@@ -936,14 +931,14 @@
     </div>
 
     <div class="sim">
-      <h4>Simulation: full power supply</h4>
+      <h4>Simulation: full power supply (simplified)</h4>
       <ol>
-        <li>In Falstad, build an AC source (50 Hz, 325 V amplitude) + 32:1 transformer + bridge rectifier + 100 μF capacitor + load resistor.</li>
-        <li>Place the oscilloscope at the transformer output and at the bridge output. Compare.</li>
-        <li>Add the capacitor and watch the ripple shrink.</li>
+        <li>In Tinkercad, use the <strong>function generator</strong> as the AC source (10 V amplitude, 50 Hz) to represent the transformer output.</li>
+        <li>Build a bridge rectifier with 4 diodes, a 100 μF filter capacitor, a 5 V Zener regulator, and a load resistor.</li>
+        <li>Place the oscilloscope at the bridge output and after the capacitor. Compare the waveforms.</li>
         <li>Sketch the three waves (AC, pulsating, filtered) and explain what each stage does.</li>
       </ol>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
     <div class="page-nav">
@@ -1089,13 +1084,13 @@
     <div class="sim">
       <h4>Simulation: comparator with an LDR</h4>
       <ol>
-        <li>In Falstad, build a 741 op-amp with ±9 V supply.</li>
+        <li>In Tinkercad, build a 741 op-amp with ±9 V supply.</li>
         <li>Connect a voltage divider with an LDR to the non-inverting input and another divider with a fixed resistor to the inverting input.</li>
         <li>Place an LED (with its current-limiting resistor) at the op-amp output.</li>
-        <li>Change the LDR value (simulating light/dark) and watch when the LED turns on.</li>
+        <li>Change the LDR light level (click on it) and watch when the LED turns on.</li>
         <li>Explain the operation in your notebook.</li>
       </ol>
-      <a class="btn btn-naranja" href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Open Falstad</a>
+      <a class="btn btn-naranja" href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Open Tinkercad</a>
     </div>
 
     <div class="page-nav">
@@ -1113,46 +1108,46 @@
   <section class="card">
     <h2 class="page-title"><span class="job">Final Exam</span>Design your own circuit</h2>
 
-    <p>You've made it to the final shift. Now <strong>apply everything you've learned</strong>. Pick <strong>one</strong> of the missions below, design it in Falstad or Tinkercad, and present it to the rest of the shop.</p>
+    <p>You've made it to the final shift. Now <strong>apply everything you've learned</strong>. Pick <strong>one</strong> of the missions below, design it in Tinkercad, and present it to the rest of the shop.</p>
 
     <div class="reto">
       <h4>Mission 1: Automatic night light <span class="nivel nivel-basico">Basic</span></h4>
       <p>Design a circuit that turns on an LED when it gets dark. Use an LDR, a transistor and a current-limiting resistor. Power it with a 9 V battery.</p>
-      <p><strong>Deliverables:</strong> schematic, component list, operation explanation, simulation screenshot.</p>
+      <p><strong>Deliverables:</strong> schematic, component list, operation explanation, Tinkercad screenshot.</p>
     </div>
 
     <div class="reto">
       <h4>Mission 2: Hallway timer light <span class="nivel nivel-basico">Basic</span></h4>
       <p>Design a circuit that turns on a lamp for 10 seconds after pressing a button, then turns off automatically. Use a capacitor and a resistor (or the 555 IC).</p>
-      <p><strong>Deliverables:</strong> schematic, R and C calculations, explanation, simulation screenshot.</p>
+      <p><strong>Deliverables:</strong> schematic, R and C calculations, explanation, Tinkercad screenshot.</p>
     </div>
 
     <div class="reto">
       <h4>Mission 3: 555 blinker <span class="nivel nivel-medio">Intermediate</span></h4>
       <p>Design a blinker that makes an LED flash every 0.5 s (on for 0.3 s, off for 0.2 s). Use the 555 in astable mode.</p>
-      <p><strong>Deliverables:</strong> schematic, calculations for R₁, R₂ and C, explanation, simulation screenshot.</p>
+      <p><strong>Deliverables:</strong> schematic, calculations for R₁, R₂ and C, explanation, Tinkercad screenshot.</p>
     </div>
 
     <div class="reto">
       <h4>Mission 4: Temperature alarm <span class="nivel nivel-medio">Intermediate</span></h4>
       <p>Design a circuit that triggers a buzzer when the temperature rises above a set value. Use a thermistor, a 741 op-amp as a comparator and a transistor to drive the buzzer.</p>
-      <p><strong>Deliverables:</strong> schematic, explanation, simulation screenshot.</p>
+      <p><strong>Deliverables:</strong> schematic, explanation, Tinkercad screenshot.</p>
     </div>
 
     <div class="reto">
-      <h4>Mission 5: Basic power supply <span class="nivel nivel-avanzado">Advanced</span></h4>
-      <p>Design a power supply that converts 230 V AC into 5 V DC. Include a transformer, bridge rectifier, filter capacitor and Zener regulator.</p>
-      <p><strong>Deliverables:</strong> full schematic, transformer / capacitor / Zener calculations, waves at every stage, explanation.</p>
+      <h4>Mission 5: Regulated DC power supply <span class="nivel nivel-avanzado">Advanced</span></h4>
+      <p>Use the Tinkercad function generator as the AC source (10 V amplitude, 50 Hz). Build a bridge rectifier, a filter capacitor and a 5 V Zener regulator. The output should be a stable 5 V DC.</p>
+      <p><strong>Deliverables:</strong> schematic, calculations, oscilloscope screenshots at each stage, explanation.</p>
     </div>
 
     <div class="reto">
       <h4>Mission 6: Voltage divider for a 1.5 V clock <span class="nivel nivel-basico">Basic</span></h4>
-      <p>A clock runs on a 1.5 V battery, but you only have a 4.5 V battery. Design a voltage divider with two resistors to feed it correctly. Calculate the values and check in the simulator.</p>
-      <p><strong>Deliverables:</strong> schematic, calculations, simulation screenshot, explanation.</p>
+      <p>A clock runs on a 1.5 V battery, but you only have a 4.5 V battery. Design a voltage divider with two resistors to feed it correctly. Calculate the values and verify the output with the multimeter.</p>
+      <p><strong>Deliverables:</strong> schematic, calculations, Tinkercad screenshot, explanation.</p>
     </div>
 
     <div class="box box-tip">
-      <strong>Presentation tips:</strong> prepare 5 slides — 1) problem, 2) circuit schematic, 3) calculations, 4) simulation running, 5) conclusions and challenges.
+      <strong>Presentation tips:</strong> prepare 5 slides — 1) problem, 2) circuit schematic, 3) calculations, 4) Tinkercad simulation running, 5) conclusions and challenges.
     </div>
 
     <h3>Achievements</h3>
@@ -1160,7 +1155,7 @@
       <thead><tr><th>Criterion</th><th>Weight</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td>Module checks</td><td>25%</td><td>Score on the check questions in each job.</td></tr>
-        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the simulator activities and logging circuit links.</td></tr>
+        <tr><td>Simulation tasks</td><td>25%</td><td>Completing the Tinkercad activities and logging circuit links.</td></tr>
         <tr><td>Final Project</td><td>30%</td><td>Design, calculations, simulation and explanation.</td></tr>
         <tr><td>Oral presentation</td><td>10%</td><td>Clarity, order and command of the topic.</td></tr>
         <tr><td>Teamwork &amp; autonomy</td><td>10%</td><td>Collaboration, task sharing, independent problem solving.</td></tr>
@@ -1186,7 +1181,7 @@
   <section class="card">
     <h2 class="page-title">📄 Final Report</h2>
 
-    <p>Fill in your name and review your progress. When you're ready, download your PDF report. It will include every question you answered, how many attempts you made, and the circuit links you logged.</p>
+    <p>Fill in your name and review your progress. When you're ready, download your PDF report. It will include every question you answered, how many attempts you made, and the Tinkercad link you logged for each module.</p>
 
     <div class="student-info">
       <label for="studentName">Your full name</label>
@@ -1207,7 +1202,7 @@
     </ul>
 
     <div class="box box-tip">
-      <strong>Before you download:</strong> make sure you've logged your Falstad and Tinkercad links in each module page, and that you've filled in your name above.
+      <strong>Before you download:</strong> make sure you've logged your Tinkercad link in each module page, and that you've filled in your name above.
     </div>
 
     <div style="text-align:center; margin:2rem 0;">
@@ -1228,7 +1223,7 @@
 
 <footer>
   <p>CircuitWorks · Analog Electronics Lab</p>
-  <p>Simulators: <a href="https://www.falstad.com/circuit/" target="_blank" rel="noopener">Falstad</a> · <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad</a></p>
+  <p>Simulator: <a href="https://www.tinkercad.com/circuits" target="_blank" rel="noopener">Tinkercad Circuits</a></p>
 </footer>
 
 <!-- PDF libraries -->
@@ -1332,7 +1327,6 @@ window.addEventListener('load', () => {
 function getAnswerText(question, value){
   const input = question.querySelector(`input[type="radio"][value="${value}"]`);
   if(!input) return '';
-  // grab the label text and strip the letter prefix
   return input.parentElement.textContent.trim();
 }
 
@@ -1350,7 +1344,6 @@ function checkQuiz(btn){
     const selected = q.querySelector('input[type="radio"]:checked');
     const qKey = 'q' + (idx + 1);
 
-    // Get or create question record
     if(!allData[moduleName].questions[qKey]){
       allData[moduleName].questions[qKey] = {
         text: q.querySelector('p').textContent.trim(),
@@ -1368,7 +1361,6 @@ function checkQuiz(btn){
     rec.correctAnswerText = getAnswerText(q, correctAnswer);
     rec.attempts += 1;
 
-    // Remove previous feedback
     let fb = q.querySelector('.feedback');
     if(fb) fb.remove();
     fb = document.createElement('div');
@@ -1458,10 +1450,9 @@ function getRankText(){
 }
 
 /* =========================================================
-   CIRCUIT LOG INJECTION
+   CIRCUIT LOG INJECTION (Tinkercad only)
 ========================================================= */
 function injectCircuitLogs(){
-  // For each module page, inject a circuit log after the last .sim block
   MODULES.forEach(modId => {
     const page = document.getElementById(modId);
     if(!page) return;
@@ -1469,20 +1460,14 @@ function injectCircuitLogs(){
     const sims = page.querySelectorAll('.sim');
     if(sims.length === 0) return;
 
-    // Build the log block
     const log = document.createElement('div');
     log.className = 'circuit-log';
     log.innerHTML = `
-      <h4>Log your circuit</h4>
+      <h4>Log your Tinkercad circuit</h4>
       <p style="font-size:.88rem; margin-bottom:.5rem; color:#555;">
-        After building and testing your circuit, export it and paste the link here. This will appear in your final PDF report.
+        After building and testing your circuit in Tinkercad, click <strong>Share → Copy link</strong> and paste it here. This will appear in your final PDF report.
       </p>
-      <label>Falstad link (File → Export → Export Link):</label>
-      <input type="url"
-             data-circuit-module="${modId}"
-             data-circuit-type="falstad"
-             placeholder="https://www.falstad.com/circuit/circuitjs.html?...">
-      <label>Tinkercad link (Share → Copy link):</label>
+      <label>Tinkercad link:</label>
       <input type="url"
              data-circuit-module="${modId}"
              data-circuit-type="tinkercad"
@@ -1495,7 +1480,6 @@ function injectCircuitLogs(){
     `;
     sims[sims.length - 1].after(log);
 
-    // Prefill saved values
     const data = getCircuitData();
     const saved = data[modId] || {};
     log.querySelectorAll('[data-circuit-type]').forEach(input => {
@@ -1509,7 +1493,6 @@ function injectCircuitLogs(){
     });
   });
 
-  // Save on input
   document.addEventListener('input', e => {
     const el = e.target;
     if(el.dataset && el.dataset.circuitModule){
@@ -1532,7 +1515,7 @@ function countLoggedCircuits(){
   let count = 0;
   MODULES.forEach(mod => {
     const m = data[mod] || {};
-    if((m.falstad && m.falstad.trim()) || (m.tinkercad && m.tinkercad.trim())){
+    if(m.tinkercad && m.tinkercad.trim()){
       count++;
     }
   });
@@ -1559,7 +1542,6 @@ function refreshReportPage(){
   const done = getDone();
   const quizData = getQuizData();
 
-  // Stats
   let totalQ = 0, correctQ = 0;
   MODULES.forEach(mod => {
     const qs = (quizData[mod] && quizData[mod].questions) || {};
@@ -1574,7 +1556,6 @@ function refreshReportPage(){
   document.getElementById('statCorrect').textContent = correctQ;
   document.getElementById('statCircuits').textContent = countLoggedCircuits() + '/8';
 
-  // Module list
   const list = document.getElementById('moduleProgressList');
   list.innerHTML = '';
   MODULES.forEach(mod => {
@@ -1583,7 +1564,7 @@ function refreshReportPage(){
     const answered = Object.keys(qs).length;
     const modDone = done.includes(mod);
     const circuit = (getCircuitData()[mod] || {});
-    const hasCircuit = (circuit.falstad && circuit.falstad.trim()) || (circuit.tinkercad && circuit.tinkercad.trim());
+    const hasCircuit = circuit.tinkercad && circuit.tinkercad.trim();
 
     li.className = modDone ? 'done' : '';
     li.innerHTML = `
@@ -1605,9 +1586,6 @@ function generatePDF(){
   if(typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF){
     alert('The PDF library failed to load. Please check your internet connection and reload the page.');
     return;
-  }
-  if(typeof window.jspdf.jsPDF.API.autoTable === 'undefined'){
-    // fallback: try doc.autoTable
   }
 
   const { jsPDF } = window.jspdf;
@@ -1668,10 +1646,9 @@ function generatePDF(){
     const questions = (quizData[mod] && quizData[mod].questions) || {};
     const circuit = circuitData[mod] || {};
     const qKeys = Object.keys(questions);
-    const hasCircuit = (circuit.falstad && circuit.falstad.trim()) || (circuit.tinkercad && circuit.tinkercad.trim());
+    const hasCircuit = circuit.tinkercad && circuit.tinkercad.trim();
     const hasNotes = circuit.notes && circuit.notes.trim();
 
-    // Module header
     if(y > pageHeight - 60){
       doc.addPage();
       y = 20;
@@ -1689,7 +1666,6 @@ function generatePDF(){
     doc.text(status, pageWidth - margin - 2, y, { align: 'right' });
     y += 6;
 
-    // Questions table
     if(qKeys.length > 0){
       const rows = qKeys.map((k, i) => {
         const q = questions[k];
@@ -1733,7 +1709,6 @@ function generatePDF(){
         });
         y = doc.lastAutoTable.finalY + 5;
       } else {
-        // fallback: plain text
         doc.setFontSize(9);
         rows.forEach(r => {
           if(y > pageHeight - 20){ doc.addPage(); y = 20; }
@@ -1751,7 +1726,6 @@ function generatePDF(){
       doc.setFont('helvetica', 'normal');
     }
 
-    // Circuit section
     if(hasCircuit || hasNotes){
       if(y > pageHeight - 40){
         doc.addPage();
@@ -1760,20 +1734,14 @@ function generatePDF(){
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(239, 108, 0);
-      doc.text('Circuit log:', margin + 2, y);
+      doc.text('Tinkercad circuit log:', margin + 2, y);
       y += 5;
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8.5);
       doc.setTextColor(33, 33, 33);
 
-      if(circuit.falstad && circuit.falstad.trim()){
-        const lines = doc.splitTextToSize('Falstad: ' + circuit.falstad.trim(), pageWidth - 2 * margin - 6);
-        if(y + lines.length * 4 > pageHeight - 15){ doc.addPage(); y = 20; }
-        doc.text(lines, margin + 4, y);
-        y += lines.length * 4 + 1;
-      }
-      if(circuit.tinkercad && circuit.tinkercad.trim()){
-        const lines = doc.splitTextToSize('Tinkercad: ' + circuit.tinkercad.trim(), pageWidth - 2 * margin - 6);
+      if(hasCircuit){
+        const lines = doc.splitTextToSize('Link: ' + circuit.tinkercad.trim(), pageWidth - 2 * margin - 6);
         if(y + lines.length * 4 > pageHeight - 15){ doc.addPage(); y = 20; }
         doc.text(lines, margin + 4, y);
         y += lines.length * 4 + 1;
@@ -1790,7 +1758,6 @@ function generatePDF(){
     y += 3;
   });
 
-  /* --- FOOTER on each page --- */
   const totalPages = doc.internal.getNumberOfPages();
   for(let i = 1; i <= totalPages; i++){
     doc.setPage(i);
@@ -1804,7 +1771,6 @@ function generatePDF(){
     );
   }
 
-  /* --- SAVE --- */
   const safeName = studentName.replace(/[^\w\s\-]/g, '').replace(/\s+/g, '_') || 'Student';
   const dateStr = new Date().toISOString().slice(0, 10);
   doc.save('CircuitWorks_Report_' + safeName + '_' + dateStr + '.pdf');
